@@ -14,8 +14,8 @@ import com.dou361.dialogui.DialogUIUtils;
 import com.dou361.dialogui.adapter.SuperRcvAdapter;
 import com.dou361.dialogui.adapter.SuperRcvHolder;
 import com.dou361.dialogui.bottomsheet.BottomSheetBean;
-import com.dou361.dialogui.interfaces.DialogUIItemListener;
-import com.dou361.dialogui.interfaces.DialogUIListener;
+import com.dou361.dialogui.listener.DialogUIItemListener;
+import com.dou361.dialogui.listener.DialogUIListener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,17 +28,17 @@ import butterknife.OnClick;
 public class MainActivity extends AppCompatActivity {
 
 
-    @Bind(R.id.btn_common_progress)
+    @Bind(R.id.btn_loading_vertical)
     Button btnCommonProgress;
-    @Bind(R.id.btn_context_progress)
+    @Bind(R.id.btn_loading_horizontal)
     Button btnContextProgress;
-    @Bind(R.id.btn_material_alert)
+    @Bind(R.id.btn_md_alert)
     Button btnMaterialAlert;
-    @Bind(R.id.btn_ios_alert)
+    @Bind(R.id.btn_alert_horizontal)
     Button btnIosAlert;
-    @Bind(R.id.btn_ios_bottom_sheet)
+    @Bind(R.id.btn_bottom_sheet_cancel)
     Button btnIosBottomSheet;
-    @Bind(R.id.btn_ios_center_list)
+    @Bind(R.id.btn_center_sheet)
     Button btnIosCenterList;
 
     /**
@@ -48,11 +48,11 @@ public class MainActivity extends AppCompatActivity {
 
     Activity activity;
     Context context;
-    @Bind(R.id.btn_ios_alert_vertical)
+    @Bind(R.id.btn_alert_vertical)
     Button btnIosAlertVertical;
-    @Bind(R.id.btn_input)
+    @Bind(R.id.btn_alert_input)
     Button btnIosAlert2;
-    @Bind(R.id.btn_multichoose)
+    @Bind(R.id.btn_alert_multichoose)
     Button btnIosAlertVertical2;
 
 
@@ -104,19 +104,19 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    @OnClick({R.id.btn_common_progress, R.id.btn_context_progress, R.id.btn_material_alert, R.id.btn_ios_alert,
-            R.id.btn_ios_alert_vertical, R.id.btn_ios_bottom_sheet, R.id.btn_ios_center_list, R.id.btn_input,
-            R.id.btn_multichoose, R.id.btn_singlechoose, R.id.btn_md_bs, R.id.btn_md_bs_listview, R.id.btn_md_bs_Gridview})
+    @OnClick({R.id.btn_loading_vertical, R.id.btn_loading_horizontal, R.id.btn_md_alert, R.id.btn_tie_alert, R.id.btn_alert_horizontal,
+            R.id.btn_alert_vertical, R.id.btn_bottom_sheet_cancel, R.id.btn_center_sheet, R.id.btn_alert_input,
+            R.id.btn_alert_multichoose, R.id.btn_alert_singlechoose, R.id.btn_bottom_sheet, R.id.btn_md_bottom_vertical, R.id.btn_md_bottom_horizontal, R.id.btn_custom_alert})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.btn_common_progress:
-                DialogUIUtils.buildLoading(this, "加载中...", true, true).show();
+            case R.id.btn_loading_vertical:
+                DialogUIUtils.showLoadingVertical(this, "加载中...", true, true).show();
                 break;
-            case R.id.btn_context_progress:
-                DialogUIUtils.buildMdLoading(getApplicationContext(), msg, true, true).show();
+            case R.id.btn_loading_horizontal:
+                DialogUIUtils.showLoadingHorizontal(this, msg, true, true).show();
                 break;
-            case R.id.btn_material_alert:
-                DialogUIUtils.buildMdAlert(activity, "title", msg, new DialogUIListener() {
+            case R.id.btn_md_alert:
+                DialogUIUtils.showMdAlert(activity, "title", msg, new DialogUIListener() {
                     @Override
                     public void onPositive() {
                         showToast("onPositive");
@@ -132,11 +132,10 @@ public class MainActivity extends AppCompatActivity {
                         showToast("onNeutral");
                     }
 
-
                 }).show();
                 break;
-            case R.id.btn_ios_alert:
-                DialogUIUtils.buildIosAlert(activity, "title", msg, new DialogUIListener() {
+            case R.id.btn_tie_alert:
+                DialogUIUtils.showAlert(activity, "title", msg, new DialogUIListener() {
                     @Override
                     public void onPositive() {
                         showToast("onPositive");
@@ -152,11 +151,10 @@ public class MainActivity extends AppCompatActivity {
                         showToast("onNeutral");
                     }
 
-
                 }).show();
                 break;
-            case R.id.btn_ios_alert_vertical:
-                DialogUIUtils.buildIosAlertVertical(this, "title", msg, new DialogUIListener() {
+            case R.id.btn_alert_horizontal:
+                DialogUIUtils.showAlertHorizontal(activity, "title", msg, new DialogUIListener() {
                     @Override
                     public void onPositive() {
                         showToast("onPositive");
@@ -172,18 +170,35 @@ public class MainActivity extends AppCompatActivity {
                         showToast("onNeutral");
                     }
 
+                }).show();
+                break;
+            case R.id.btn_alert_vertical:
+                DialogUIUtils.showAlertVertical(this, "title", msg, new DialogUIListener() {
+                    @Override
+                    public void onPositive() {
+                        showToast("onPositive");
+                    }
+
+                    @Override
+                    public void onNegative() {
+                        showToast("onNegative");
+                    }
+
+                    @Override
+                    public void onNeutral() {
+                        showToast("onNeutral");
+                    }
 
                 }).show();
                 break;
-            case R.id.btn_ios_bottom_sheet: {
+            case R.id.btn_bottom_sheet_cancel: {
                 final List<String> strings = new ArrayList<>();
                 strings.add("1");
                 strings.add("2");
                 strings.add(msg);
                 strings.add("4");
                 strings.add("5");
-
-                DialogUIUtils.buildBottomItemDialog(activity, strings, "cancle", new DialogUIItemListener() {
+                DialogUIUtils.showBottomSheetAndCancel(activity, strings, "cancle", new DialogUIItemListener() {
                     @Override
                     public void onItemClick(CharSequence text, int position) {
                         showToast(text);
@@ -196,8 +211,7 @@ public class MainActivity extends AppCompatActivity {
                 }).show();
             }
             break;
-            case R.id.btn_ios_center_list:
-
+            case R.id.btn_center_sheet:
                 final List<String> strings = new ArrayList<>();
                 strings.add("1");
                 strings.add("2");
@@ -205,8 +219,7 @@ public class MainActivity extends AppCompatActivity {
                 strings.add("4");
                 strings.add("5");
                 strings.add(msg);
-
-                DialogUIUtils.buildIosSingleChoose(activity, strings, new DialogUIItemListener() {
+                DialogUIUtils.showCenterSheet(activity, strings, new DialogUIItemListener() {
                     @Override
                     public void onItemClick(CharSequence text, int position) {
                         showToast(text);
@@ -219,8 +232,8 @@ public class MainActivity extends AppCompatActivity {
                 }).show();
 
                 break;
-            case R.id.btn_input:
-                DialogUIUtils.buildNormalInput(activity, "登录", "请输入用户名", "请输入密码", "登录", "取消", new DialogUIListener() {
+            case R.id.btn_alert_input:
+                DialogUIUtils.showAlertInput(activity, "登录", "请输入用户名", "请输入密码", "登录", "取消", new DialogUIListener() {
                     @Override
                     public void onPositive() {
 
@@ -237,15 +250,11 @@ public class MainActivity extends AppCompatActivity {
                         showToast("input1:" + input1 + "--input2:" + input2);
                     }
                 }).show();
-
                 break;
-            case R.id.btn_multichoose:
+            case R.id.btn_alert_multichoose:
                 String[] words = new String[]{"12", "78", "45", "89", "88", "00"};
-
-
                 boolean[] choseDefault = new boolean[]{false, false, false, false, true, false};
-
-                DialogUIUtils.buildMdMultiChoose(activity, "xuanze", words, choseDefault, new DialogUIListener() {
+                DialogUIUtils.showMdMultiChoose(activity, "xuanze", words, choseDefault, new DialogUIListener() {
                     @Override
                     public void onPositive() {
 
@@ -257,21 +266,18 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }).show();
                 break;
-            case R.id.btn_singlechoose:
+            case R.id.btn_alert_singlechoose:
                 String[] words2 = new String[]{"12", "78", "45", "89", "88", "00"};
-                DialogUIUtils.buildMdSingleChoose(activity, "单选", 2, words2, new DialogUIItemListener() {
+                DialogUIUtils.showSingleChoose(activity, "单选", 2, words2, new DialogUIItemListener() {
                     @Override
                     public void onItemClick(CharSequence text, int position) {
                         showToast(text + "--" + position);
                     }
                 }).show();
-
                 break;
-            case R.id.btn_md_bs:
+            case R.id.btn_bottom_sheet:
                 String[] words3 = new String[]{"12", "78", "45", "89", "88", "00"};
                 List<String> datas = Arrays.asList(words3);
-
-                // final BottomSheetDialog dialog = new BottomSheetDialog(this);
                 RecyclerView recyclerView = new RecyclerView(this);
                 recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
                 SuperRcvAdapter adapter = new SuperRcvAdapter(this) {
@@ -302,54 +308,40 @@ public class MainActivity extends AppCompatActivity {
                 adapter.addAll(datas);
                 adapter.addAll(datas);
                 adapter.addAll(datas);
-
-                DialogUIUtils.buildCustomBottomSheet(this, recyclerView).show();//不好建立回调
-
-
+                DialogUIUtils.showBottomSheet(this, recyclerView).show();//不好建立回
                 break;
-
-            case R.id.btn_md_bs_listview: {
+            case R.id.btn_md_bottom_vertical:
                 List<BottomSheetBean> datas2 = new ArrayList<>();
-
                 datas2.add(new BottomSheetBean(R.mipmap.ic_launcher, "1"));
                 datas2.add(new BottomSheetBean(R.mipmap.ic_launcher, "222"));
                 datas2.add(new BottomSheetBean(R.mipmap.ic_launcher, "333333"));
                 datas2.add(new BottomSheetBean(R.mipmap.ic_launcher, "444"));
                 datas2.add(new BottomSheetBean(R.mipmap.ic_launcher, "55"));
                 datas2.add(new BottomSheetBean(R.mipmap.ic_launcher, "666"));
-
                 datas2.add(new BottomSheetBean(R.mipmap.ic_launcher, "7777"));
                 datas2.add(new BottomSheetBean(R.mipmap.ic_launcher, "fddsf"));
                 datas2.add(new BottomSheetBean(R.mipmap.ic_launcher, "67gfhfg"));
                 datas2.add(new BottomSheetBean(R.mipmap.ic_launcher, "oooooppp"));
-
-
-                DialogUIUtils.buildBottomSheetLv(activity, "拉出来溜溜", datas2, "this is cancle button", new DialogUIItemListener() {
+                DialogUIUtils.showMdBottomSheetVertical(activity, "拉出来溜溜", datas2, "this is cancle button", new DialogUIItemListener() {
                     @Override
                     public void onItemClick(CharSequence text, int position) {
                         showToast(text + "---" + position);
                     }
                 }).show();
-            }
-            break;
-
-            case R.id.btn_md_bs_Gridview:
-                List<BottomSheetBean> datas2 = new ArrayList<>();
-
-                datas2.add(new BottomSheetBean(R.mipmap.ic_launcher, "1"));
-                datas2.add(new BottomSheetBean(R.mipmap.ic_launcher, "222"));
-                datas2.add(new BottomSheetBean(R.mipmap.ic_launcher, "333333"));
-                datas2.add(new BottomSheetBean(R.mipmap.ic_launcher, "444"));
-                datas2.add(new BottomSheetBean(R.mipmap.ic_launcher, "55"));
-                datas2.add(new BottomSheetBean(R.mipmap.ic_launcher, "666"));
-
-                datas2.add(new BottomSheetBean(R.mipmap.ic_launcher, "7777"));
-                datas2.add(new BottomSheetBean(R.mipmap.ic_launcher, "fddsf"));
-                datas2.add(new BottomSheetBean(R.mipmap.ic_launcher, "67gfhfg"));
-                datas2.add(new BottomSheetBean(R.mipmap.ic_launcher, "oooooppp"));
-
-
-                DialogUIUtils.buildBottomSheetGv(activity, "拉出来溜溜", datas2, "this is cancle button", 3, new DialogUIItemListener() {
+                break;
+            case R.id.btn_md_bottom_horizontal:
+                List<BottomSheetBean> datas3 = new ArrayList<>();
+                datas3.add(new BottomSheetBean(R.mipmap.ic_launcher, "1"));
+                datas3.add(new BottomSheetBean(R.mipmap.ic_launcher, "222"));
+                datas3.add(new BottomSheetBean(R.mipmap.ic_launcher, "333333"));
+                datas3.add(new BottomSheetBean(R.mipmap.ic_launcher, "444"));
+                datas3.add(new BottomSheetBean(R.mipmap.ic_launcher, "55"));
+                datas3.add(new BottomSheetBean(R.mipmap.ic_launcher, "666"));
+                datas3.add(new BottomSheetBean(R.mipmap.ic_launcher, "7777"));
+                datas3.add(new BottomSheetBean(R.mipmap.ic_launcher, "fddsf"));
+                datas3.add(new BottomSheetBean(R.mipmap.ic_launcher, "67gfhfg"));
+                datas3.add(new BottomSheetBean(R.mipmap.ic_launcher, "oooooppp"));
+                DialogUIUtils.showMdBottomSheetHorizontal(activity, "拉出来溜溜", datas3, "this is cancle button", 3, new DialogUIItemListener() {
                     @Override
                     public void onItemClick(CharSequence text, int position) {
                         showToast(text + "---" + position);

@@ -8,9 +8,9 @@ import android.content.DialogInterface;
 import android.support.v7.app.AppCompatDialog;
 import android.view.View;
 
-import com.dou361.dialogui.config.ConfigBean;
-import com.dou361.dialogui.interfaces.DialogUIListener;
-import com.dou361.dialogui.interfaces.DialogUIItemListener;
+import com.dou361.dialogui.config.BuildBean;
+import com.dou361.dialogui.listener.DialogUIItemListener;
+import com.dou361.dialogui.listener.DialogUIListener;
 
 import java.util.List;
 
@@ -36,16 +36,15 @@ import java.util.List;
  */
 public class DialogUIUtils {
 
+    public static Context appContext;
 
-    public static Context context;
-
-    private static int singleChosen;
-
-
-    public static void init(Context context) {
-        DialogUIUtils.context = context;
+    public static void init(Context appContext) {
+        DialogUIUtils.appContext = appContext;
     }
 
+    /**
+     * 关闭弹出框
+     */
     public static void dismiss(DialogInterface... dialogs) {
         if (dialogs != null && dialogs.length > 0) {
             for (DialogInterface dialog : dialogs) {
@@ -65,68 +64,109 @@ public class DialogUIUtils {
         }
     }
 
-    public static ConfigBean buildLoading(Context context, CharSequence msg, boolean cancleable, boolean outsideTouchable) {
-        return DialogAssigner.getInstance().assignLoading(context, msg, cancleable, outsideTouchable);
+    /**
+     * 横向加载框
+     */
+    public static BuildBean showLoadingHorizontal(Context context, CharSequence msg, boolean cancleable, boolean outsideTouchable) {
+        return DialogAssigner.getInstance().assignLoadingHorizontal(context, msg, cancleable, outsideTouchable);
     }
 
-    public static ConfigBean buildMdLoading(Context context, CharSequence msg, boolean cancleable, boolean outsideTouchable) {
-        return DialogAssigner.getInstance().assignMdLoading(context, msg, cancleable, outsideTouchable);
+    /**
+     * 竖向加载框
+     */
+    public static BuildBean showLoadingVertical(Context context, CharSequence msg, boolean cancleable, boolean outsideTouchable) {
+        return DialogAssigner.getInstance().assignLoadingVertical(context, msg, cancleable, outsideTouchable);
     }
 
-
-    public static ConfigBean buildMdAlert(Activity activity, CharSequence title, CharSequence msg, DialogUIListener listener) {
+    /**
+     * md风格弹出框
+     */
+    public static BuildBean showMdAlert(Activity activity, CharSequence title, CharSequence msg, DialogUIListener listener) {
         return DialogAssigner.getInstance().assignMdAlert(activity, title, msg, listener);
     }
 
-
-    public static ConfigBean buildMdSingleChoose(Activity context, CharSequence title, int defaultChosen, CharSequence[] words, DialogUIItemListener listener) {
-        return DialogAssigner.getInstance().assignMdSingleChoose(context, title, defaultChosen, words, listener);
-    }
-
-
-    public static ConfigBean buildMdMultiChoose(Activity context, CharSequence title, CharSequence[] words, boolean[] checkedItems, DialogUIListener btnListener) {
+    /**
+     * md风格多选框
+     */
+    public static BuildBean showMdMultiChoose(Activity context, CharSequence title, CharSequence[] words, boolean[] checkedItems, DialogUIListener btnListener) {
         return DialogAssigner.getInstance().assignMdMultiChoose(context, title, words, checkedItems, btnListener);
     }
 
-
-    public static ConfigBean buildIosAlert(Context activity, CharSequence title, CharSequence msg, DialogUIListener listener) {
-        return DialogAssigner.getInstance().assignIosAlert(activity, title, msg, listener);
+    /**
+     * 单选框
+     */
+    public static BuildBean showSingleChoose(Activity context, CharSequence title, int defaultChosen, CharSequence[] words, DialogUIItemListener listener) {
+        return DialogAssigner.getInstance().assignSingleChoose(context, title, defaultChosen, words, listener);
     }
 
-
-    public static ConfigBean buildIosAlertVertical(Context activity, CharSequence title, CharSequence msg, DialogUIListener listener) {
-        return DialogAssigner.getInstance().assignIosAlertVertical(activity, title, msg, listener);
+    /**
+     * 提示弹出框
+     */
+    public static BuildBean showAlert(Context activity, CharSequence title, CharSequence msg, DialogUIListener listener) {
+        return DialogAssigner.getInstance().assignAlert(activity, title, msg, listener);
     }
 
-
-    public static ConfigBean buildIosSingleChoose(Context context, List<? extends CharSequence> words, DialogUIItemListener listener) {
-        return DialogAssigner.getInstance().assignIosSingleChoose(context, words, listener);
+    /**
+     * 横向弹出框
+     */
+    public static BuildBean showAlertHorizontal(Context activity, CharSequence title, CharSequence msg, DialogUIListener listener) {
+        return DialogAssigner.getInstance().assignAlertHorizontal(activity, title, msg, listener);
     }
 
-
-    public static ConfigBean buildBottomItemDialog(Context context, List<? extends CharSequence> words, CharSequence bottomTxt, DialogUIItemListener listener) {
-        return DialogAssigner.getInstance().assignBottomItemDialog(context, words, bottomTxt, listener);
+    /**
+     * 竖向弹出框
+     */
+    public static BuildBean showAlertVertical(Context activity, CharSequence title, CharSequence msg, DialogUIListener listener) {
+        return DialogAssigner.getInstance().assignAlertVertical(activity, title, msg, listener);
     }
 
-
-    public static ConfigBean buildNormalInput(Context context, CharSequence title, CharSequence hint1, CharSequence hint2, CharSequence firstTxt, CharSequence secondTxt, DialogUIListener listener) {
-        return DialogAssigner.getInstance().assignNormalInput(context, title, hint1, hint2, firstTxt, secondTxt, listener);
+    /**
+     * 中间弹出列表
+     */
+    public static BuildBean showCenterSheet(Context context, List<? extends CharSequence> words, DialogUIItemListener listener) {
+        return DialogAssigner.getInstance().assignCenterSheet(context, words, listener);
     }
 
-    public static ConfigBean buildCustom(Context context, View contentView, int gravity) {
-        return DialogAssigner.getInstance().assignCustom(context, contentView, gravity);
+    /**
+     * 带取消的底部弹出列表
+     */
+    public static BuildBean showBottomSheetAndCancel(Context context, List<? extends CharSequence> words, CharSequence bottomTxt, DialogUIItemListener listener) {
+        return DialogAssigner.getInstance().assignBottomSheetAndCancel(context, words, bottomTxt, listener);
     }
 
-    public static ConfigBean buildCustomBottomSheet(Activity context, View contentView) {
-        return DialogAssigner.getInstance().assignCustomBottomSheet(context, contentView);
+    /**
+     * 底部弹出列表
+     */
+    public static BuildBean showBottomSheet(Activity context, View contentView) {
+        return DialogAssigner.getInstance().assignBottomSheet(context, contentView);
     }
 
-    public static ConfigBean buildBottomSheetLv(Context context, CharSequence title, List datas, CharSequence bottomTxt, DialogUIItemListener listener) {
-        return DialogAssigner.getInstance().assignBottomSheetLv(context, title, datas, bottomTxt, listener);
+    /**
+     * 输入框
+     */
+    public static BuildBean showAlertInput(Context context, CharSequence title, CharSequence hint1, CharSequence hint2, CharSequence firstTxt, CharSequence secondTxt, DialogUIListener listener) {
+        return DialogAssigner.getInstance().assignAlertInput(context, title, hint1, hint2, firstTxt, secondTxt, listener);
     }
 
-    public static ConfigBean buildBottomSheetGv(Context context, CharSequence title, List datas, CharSequence bottomTxt, int columnsNum, DialogUIItemListener listener) {
-        return DialogAssigner.getInstance().assignBottomSheetGv(context, title, datas, bottomTxt, columnsNum, listener);
+    /**
+     * md风格竖向底部弹出列表
+     */
+    public static BuildBean showMdBottomSheetVertical(Context context, CharSequence title, List datas, CharSequence bottomTxt, DialogUIItemListener listener) {
+        return DialogAssigner.getInstance().assignMdBottomSheetVertical(context, title, datas, bottomTxt, listener);
+    }
+
+    /**
+     * md风格横向底部弹出列表
+     */
+    public static BuildBean showMdBottomSheetHorizontal(Context context, CharSequence title, List datas, CharSequence bottomTxt, int columnsNum, DialogUIItemListener listener) {
+        return DialogAssigner.getInstance().assignMdBottomSheetHorizontal(context, title, datas, bottomTxt, columnsNum, listener);
+    }
+
+    /**
+     * 自定义弹出框
+     */
+    public static BuildBean showCustomAlert(Context context, View contentView, int gravity) {
+        return DialogAssigner.getInstance().assignCustomAlert(context, contentView, gravity);
     }
 
 }

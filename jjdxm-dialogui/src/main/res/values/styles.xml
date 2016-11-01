@@ -15,5 +15,4 @@
         <item name="android:windowNoTitle">true</item>
     </style>
 
-    <style name="Widget.GifMoviewView" parent="@android:style/Widget"></style>
 </resources>

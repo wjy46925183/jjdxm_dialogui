@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:background="@drawable/dialogui_shape_wihte_round_corner">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:baselineAligned="false"
+        android:elevation="10dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingBottom="14dip"
+        android:paddingEnd="8dip"
+        android:paddingStart="8dip"
+        android:paddingTop="14dip">
+
+        <ProgressBar
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="12dip"
+            android:layout_marginRight="12dip"
+            android:indeterminate="true"
+            android:indeterminateDrawable="@drawable/dialogui_shape_progressstyle"
+            android:indeterminateDuration="1200"
+            android:max="10000"/>
+
+        <TextView
+            android:id="@+id/dialogui_tv_msg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text=""
+            android:textColor="#222222"
+            android:textSize="@dimen/dialogui_msg_txt_size"/>
+    </LinearLayout>
+</FrameLayout>
