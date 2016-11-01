@@ -121,9 +121,41 @@ public class Buildable {
         return bean;
     }
 
-    private void buildBottomSheetHorizontal(BuildBean bean) {
+    private void buildBottomSheetHorizontal(final BuildBean bean) {
         final BottomSheetDialog dialog = new BottomSheetDialog(bean.context);
-        dialog.setContentView(bean.customView);
+        LinearLayout root = (LinearLayout) View.inflate(bean.context, R.layout.dialogui_item_bottomsheet_lv, null);
+        TextView tvTitle = (TextView) root.findViewById(R.id.dialogui_tv_title);
+        if (TextUtils.isEmpty(bean.title)) {
+            tvTitle.setVisibility(View.GONE);
+        } else {
+            tvTitle.setText(bean.title);
+        }
+        GridView listView = new GridView(bean.context);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        listView.setLayoutParams(params);
+        // ListView listView = (ListView) root.findViewById(R.id.lv);
+        listView.setNumColumns(bean.gridColumns);
+        root.addView(listView, 1);
+        if (bean.mAdapter == null) {
+            SuperLvAdapter adapter = new SuperLvAdapter(bean.context) {
+                @Override
+                protected SuperLvHolder generateNewHolder(Context context, int itemViewType) {
+                    return new BottomHorizontalHolder(context);
+                }
+            };
+            bean.mAdapter = adapter;
+        }
+        listView.setAdapter(bean.mAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                BottomSheetBean sheetBean = (BottomSheetBean) bean.lvDatas.get(position);
+                dialog.dismiss();
+                bean.itemListener.onItemClick(sheetBean.text, position);
+            }
+        });
+        bean.mAdapter.addAll(bean.lvDatas);
+        dialog.setContentView(root);
         bean.dialog = dialog;
     }
 
@@ -136,59 +168,31 @@ public class Buildable {
         } else {
             tvTitle.setText(bean.title);
         }
-        if (bean.type == CommonConfig.TYPE_BOTTOM_SHEET_VERTICAL) {
-            ListView listView = new ListView(bean.context);
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            listView.setLayoutParams(params);
-            listView.setDividerHeight(0);
-            // ListView listView = (ListView) root.findViewById(R.id.lv);
-            root.addView(listView, 1);
-            if (bean.mAdapter == null) {
-                SuperLvAdapter adapter = new SuperLvAdapter(bean.context) {
-                    @Override
-                    protected SuperLvHolder generateNewHolder(Context context, int itemViewType) {
-                        return new BottomVerticalHolder(context);
-                    }
-                };
-                bean.mAdapter = adapter;
-            }
-            listView.setAdapter(bean.mAdapter);
-            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        ListView listView = new ListView(bean.context);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        listView.setLayoutParams(params);
+        listView.setDividerHeight(0);
+        // ListView listView = (ListView) root.findViewById(R.id.lv);
+        root.addView(listView, 1);
+        if (bean.mAdapter == null) {
+            SuperLvAdapter adapter = new SuperLvAdapter(bean.context) {
                 @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    BottomSheetBean sheetBean = (BottomSheetBean) bean.lvDatas.get(position);
-                    dialog.dismiss();
-                    bean.itemListener.onItemClick(sheetBean.text, position);
+                protected SuperLvHolder generateNewHolder(Context context, int itemViewType) {
+                    return new BottomVerticalHolder(context);
                 }
-            });
-            bean.mAdapter.addAll(bean.lvDatas);
-        } else if (bean.type == CommonConfig.TYPE_BOTTOM_SHEET_HORIZONTAL) {
-            GridView listView = new GridView(bean.context);
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            listView.setLayoutParams(params);
-            // ListView listView = (ListView) root.findViewById(R.id.lv);
-            listView.setNumColumns(bean.gridColumns);
-            root.addView(listView, 1);
-            if (bean.mAdapter == null) {
-                SuperLvAdapter adapter = new SuperLvAdapter(bean.context) {
-                    @Override
-                    protected SuperLvHolder generateNewHolder(Context context, int itemViewType) {
-                        return new BottomHorizontalHolder(context);
-                    }
-                };
-                bean.mAdapter = adapter;
-            }
-            listView.setAdapter(bean.mAdapter);
-            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    BottomSheetBean sheetBean = (BottomSheetBean) bean.lvDatas.get(position);
-                    dialog.dismiss();
-                    bean.itemListener.onItemClick(sheetBean.text, position);
-                }
-            });
-            bean.mAdapter.addAll(bean.lvDatas);
+            };
+            bean.mAdapter = adapter;
         }
+        listView.setAdapter(bean.mAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                BottomSheetBean sheetBean = (BottomSheetBean) bean.lvDatas.get(position);
+                dialog.dismiss();
+                bean.itemListener.onItemClick(sheetBean.text, position);
+            }
+        });
+        bean.mAdapter.addAll(bean.lvDatas);
         dialog.setContentView(root);
         bean.dialog = dialog;
     }
@@ -314,7 +318,7 @@ public class Buildable {
     }
 
     protected BuildBean buildAlert(BuildBean bean) {
-        bean.isVertical = false;
+        bean.isVertical = true;
         bean.hint1 = "";
         buildCommon(bean);
         return bean;

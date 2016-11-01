@@ -91,6 +91,7 @@ public class DialogAssigner implements Assignable {
         bean.context = activity;
         bean.msg = msg;
         bean.title = title;
+        bean.text2 = "";
         bean.listener = listener;
         bean.type = CommonConfig.TYPE_ALERT;
         return bean;

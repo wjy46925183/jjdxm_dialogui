@@ -113,11 +113,11 @@ public class BuildBean extends Buildable implements Styleable {
 支持gridview 或者recylerview*/
 
     //字体大小
-    public int btnTxtSize = CommonConfig.btnTxtSize;// in sp
-    public int titleTxtSize = CommonConfig.titleTxtSize;
-    public int msgTxtSize = CommonConfig.msgTxtSize;
-    public int itemTxtSize = CommonConfig.itemTxtSize;
-    public int inputTxtSize = CommonConfig.inputTxtSize;
+    public int btnTxtSize = 17;// in sp
+    public int titleTxtSize = 14;
+    public int msgTxtSize = 14;
+    public int itemTxtSize = 14;
+    public int inputTxtSize = 14;
 
 
     @Override
