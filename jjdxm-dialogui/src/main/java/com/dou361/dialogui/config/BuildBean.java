@@ -63,7 +63,11 @@ public class BuildBean extends Buildable implements Styleable {
     public DialogUIListener listener;
     public DialogUIItemListener itemListener;
 
+    /**是否是白色背景*/
+    public boolean isWhiteBg = true;
+    /**是否可以取消*/
     public boolean cancelable = true;
+    /**面板外是否可以点击*/
     public boolean outsideTouchable = true;
 
     public Dialog dialog;

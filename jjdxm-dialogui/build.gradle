@@ -55,7 +55,6 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
     compile rootProject.ext.jjdxm_v7
-    compile rootProject.ext.jjdxm_recyclerview
     compile rootProject.ext.jjdxm_design
 }
 

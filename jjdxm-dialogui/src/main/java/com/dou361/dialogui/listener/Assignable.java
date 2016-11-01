@@ -31,14 +31,19 @@ import java.util.List;
 public interface Assignable {
 
     /**
+     * 弹出框
+     */
+    BuildBean assignToastTie(Context context, CharSequence msg, boolean cancleable, boolean outsideTouchable,boolean isWhiteBg);
+
+    /**
      * 横向加载框
      */
-    BuildBean assignLoadingHorizontal(Context context, CharSequence msg, boolean cancleable, boolean outsideTouchable);
+    BuildBean assignLoadingHorizontal(Context context, CharSequence msg, boolean cancleable, boolean outsideTouchable,boolean isWhiteBg);
 
     /**
      * 竖向加载框
      */
-    BuildBean assignLoadingVertical(Context context, CharSequence msg, boolean cancleable, boolean outsideTouchable);
+    BuildBean assignLoadingVertical(Context context, CharSequence msg, boolean cancleable, boolean outsideTouchable,boolean isWhiteBg);
 
     /**
      * md风格弹出框

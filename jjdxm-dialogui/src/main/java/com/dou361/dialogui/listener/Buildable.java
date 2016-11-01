@@ -2,6 +2,7 @@ package com.dou361.dialogui.listener;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
@@ -56,6 +57,10 @@ public class Buildable {
     protected BuildBean buildByType(BuildBean bean) {
         ToolUtils.fixContext(bean);
         switch (bean.type) {
+            case CommonConfig.TYPE_TOAST_TIE:
+                ToolUtils.newCustomDialog(bean);
+                buildToastTie(bean);
+                break;
             case CommonConfig.TYPE_LOADING_HORIZONTAL:
                 ToolUtils.newCustomDialog(bean);
                 buildLoadingHorizontal(bean);
@@ -205,20 +210,58 @@ public class Buildable {
         bean.dialog = dialog;
     }
 
-    protected BuildBean buildLoadingVertical(BuildBean bean) {
-        View root = View.inflate(bean.context, R.layout.dialogui_loading_vertical, null);
+    protected BuildBean buildToastTie(BuildBean bean) {
+        View root = View.inflate(bean.context, R.layout.dialogui_toast_tie, null);
+        View llBg = (View) root.findViewById(R.id.dialogui_ll_bg);
         TextView tvMsg = (TextView) root.findViewById(R.id.dialogui_tv_msg);
         tvMsg.setText(bean.msg);
+        if(bean.isWhiteBg){
+            llBg.setBackgroundResource(R.drawable.dialogui_shape_wihte_round_corner);
+            tvMsg.setTextColor(bean.context.getResources().getColor(R.color.text_black));
+        } else {
+            llBg.setBackgroundResource(R.drawable.dialogui_shape_gray_round_corner);
+            tvMsg.setTextColor(Color.WHITE);
+        }
         bean.dialog.setContentView(root);
+        bean.dialog.setCancelable(bean.cancelable);
+        bean.dialog.setCanceledOnTouchOutside(bean.outsideTouchable);
+        return bean;
+    }
+
+    protected BuildBean buildLoadingVertical(BuildBean bean) {
+        View root = View.inflate(bean.context, R.layout.dialogui_loading_vertical, null);
+        View llBg = (View) root.findViewById(R.id.dialogui_ll_bg);
+        TextView tvMsg = (TextView) root.findViewById(R.id.dialogui_tv_msg);
+        tvMsg.setText(bean.msg);
+        if(bean.isWhiteBg){
+            llBg.setBackgroundResource(R.drawable.dialogui_shape_wihte_round_corner);
+            tvMsg.setTextColor(bean.context.getResources().getColor(R.color.text_black));
+        } else {
+            llBg.setBackgroundResource(R.drawable.dialogui_shape_gray_round_corner);
+            tvMsg.setTextColor(Color.WHITE);
+        }
+        bean.dialog.setContentView(root);
+        bean.dialog.setCancelable(bean.cancelable);
+        bean.dialog.setCanceledOnTouchOutside(bean.outsideTouchable);
         return bean;
     }
 
 
     protected BuildBean buildLoadingHorizontal(BuildBean bean) {
         View root = View.inflate(bean.context, R.layout.dialogui_loading_horizontal, null);
+        View llBg = (View) root.findViewById(R.id.dialogui_ll_bg);
         TextView tvMsg = (TextView) root.findViewById(R.id.dialogui_tv_msg);
         tvMsg.setText(bean.msg);
+        if(bean.isWhiteBg){
+            llBg.setBackgroundResource(R.drawable.dialogui_shape_wihte_round_corner);
+            tvMsg.setTextColor(bean.context.getResources().getColor(R.color.text_black));
+        } else {
+            llBg.setBackgroundResource(R.drawable.dialogui_shape_gray_round_corner);
+            tvMsg.setTextColor(Color.WHITE);
+        }
         bean.dialog.setContentView(root);
+        bean.dialog.setCancelable(bean.cancelable);
+        bean.dialog.setCanceledOnTouchOutside(bean.outsideTouchable);
         return bean;
     }
 

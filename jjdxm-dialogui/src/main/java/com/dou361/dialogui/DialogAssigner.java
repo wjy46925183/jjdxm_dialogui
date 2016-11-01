@@ -32,11 +32,38 @@ public class DialogAssigner implements Assignable {
 
 
     @Override
-    public BuildBean assignLoadingHorizontal(Context context, CharSequence msg, boolean cancleable, boolean outsideTouchable) {
+    public BuildBean assignToastTie(Context context, CharSequence msg, boolean cancleable, boolean outsideTouchable, boolean isWhiteBg) {
         BuildBean bean = new BuildBean();
         bean.context = context;
         bean.msg = msg;
+        bean.isWhiteBg = isWhiteBg;
+        bean.cancelable = cancleable;
+        bean.outsideTouchable = outsideTouchable;
+        bean.type = CommonConfig.TYPE_TOAST_TIE;
+        return bean;
+    }
+
+    @Override
+    public BuildBean assignLoadingHorizontal(Context context, CharSequence msg, boolean cancleable, boolean outsideTouchable, boolean isWhiteBg) {
+        BuildBean bean = new BuildBean();
+        bean.context = context;
+        bean.msg = msg;
+        bean.isWhiteBg = isWhiteBg;
+        bean.cancelable = cancleable;
+        bean.outsideTouchable = outsideTouchable;
         bean.type = CommonConfig.TYPE_LOADING_HORIZONTAL;
+        return bean;
+    }
+
+    @Override
+    public BuildBean assignLoadingVertical(Context context, CharSequence msg, boolean cancleable, boolean outsideTouchable, boolean isWhiteBg) {
+        BuildBean bean = new BuildBean();
+        bean.context = context;
+        bean.msg = msg;
+        bean.isWhiteBg = isWhiteBg;
+        bean.cancelable = cancleable;
+        bean.outsideTouchable = outsideTouchable;
+        bean.type = CommonConfig.TYPE_LOADING_VERTICAL;
         return bean;
     }
 
@@ -171,16 +198,6 @@ public class DialogAssigner implements Assignable {
         bean.context = context;
         bean.customView = contentView;
         bean.type = CommonConfig.TYPE_BOTTOM_SHEET;
-        return bean;
-    }
-
-    @Override
-    public BuildBean assignLoadingVertical(Context context, CharSequence msg, boolean cancleable, boolean outsideTouchable) {
-        BuildBean bean = new BuildBean();
-        bean.context = context;
-        bean.msg = msg;
-        bean.type = CommonConfig.TYPE_LOADING_VERTICAL;
-
         return bean;
     }
 

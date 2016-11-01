@@ -6,7 +6,9 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.app.AppCompatDialog;
+import android.view.Gravity;
 import android.view.View;
+import android.widget.Toast;
 
 import com.dou361.dialogui.config.BuildBean;
 import com.dou361.dialogui.listener.DialogUIItemListener;
@@ -65,17 +67,45 @@ public class DialogUIUtils {
     }
 
     /**
+     * 弹出toast
+     */
+    public static BuildBean showToastTie(Context context, CharSequence msg) {
+        return showToastTie(context, msg, false);
+    }
+
+    /**
+     * 弹出toast
+     */
+    public static BuildBean showToastTie(Context context, CharSequence msg, boolean isWhiteBg) {
+        return DialogAssigner.getInstance().assignToastTie(context, msg, true, true, isWhiteBg);
+    }
+
+    /**
      * 横向加载框
      */
     public static BuildBean showLoadingHorizontal(Context context, CharSequence msg, boolean cancleable, boolean outsideTouchable) {
-        return DialogAssigner.getInstance().assignLoadingHorizontal(context, msg, cancleable, outsideTouchable);
+        return showLoadingHorizontal(context, msg, cancleable, outsideTouchable, false);
+    }
+
+    /**
+     * 横向加载框
+     */
+    public static BuildBean showLoadingHorizontal(Context context, CharSequence msg, boolean cancleable, boolean outsideTouchable, boolean isWhiteBg) {
+        return DialogAssigner.getInstance().assignLoadingHorizontal(context, msg, cancleable, outsideTouchable, isWhiteBg);
     }
 
     /**
      * 竖向加载框
      */
     public static BuildBean showLoadingVertical(Context context, CharSequence msg, boolean cancleable, boolean outsideTouchable) {
-        return DialogAssigner.getInstance().assignLoadingVertical(context, msg, cancleable, outsideTouchable);
+        return showLoadingVertical(context, msg, cancleable, outsideTouchable, false);
+    }
+
+    /**
+     * 竖向加载框
+     */
+    public static BuildBean showLoadingVertical(Context context, CharSequence msg, boolean cancleable, boolean outsideTouchable, boolean isWhiteBg) {
+        return DialogAssigner.getInstance().assignLoadingVertical(context, msg, cancleable, outsideTouchable, isWhiteBg);
     }
 
     /**
@@ -167,6 +197,110 @@ public class DialogUIUtils {
      */
     public static BuildBean showCustomAlert(Context context, View contentView, int gravity) {
         return DialogAssigner.getInstance().assignCustomAlert(context, contentView, gravity);
+    }
+
+
+    /**
+     * 短时间中下位置显示。线程安全，可以在非UI线程调用。
+     */
+    public static void showToastShort(final int resId) {
+        showToastShort(getString(resId));
+    }
+
+    /**
+     * 短时间中下位置显示。
+     */
+    public static void showToastShort(final String str) {
+        showToast2Bottom(str, Toast.LENGTH_SHORT);
+    }
+
+    /**
+     * 长时间中下位置显示。
+     */
+    public static void showToastLong(final int resId) {
+        showToastLong(getString(resId));
+    }
+
+    /**
+     * 长时间中下位置显示。
+     */
+    public static void showToastLong(final String str) {
+        showToast2Bottom(str, Toast.LENGTH_LONG);
+    }
+
+    /**
+     * 只定义一个Toast
+     */
+    private static Toast mToastBottom;
+
+    /**
+     * 对toast的简易封装。线程不安全，不可以在非UI线程调用。
+     */
+    private static void showToast2Bottom(String str, int showTime) {
+        if (appContext == null) {
+            throw new RuntimeException("DialogUIUtils not initialized!");
+        }
+        if (mToastBottom == null) {
+            mToastBottom = Toast.makeText(appContext, str, showTime);
+        } else {
+            mToastBottom.setText(str);
+        }
+        mToastBottom.show();
+    }
+
+    /**
+     * 短时间居中位置显示。
+     */
+    public static void showToastCenterShort(final int resId) {
+        showToastCenterShort(getString(resId));
+    }
+
+    /**
+     * 短时间居中位置显示。
+     */
+    public static void showToastCenterShort(final String str) {
+        showToast2Center(str, Toast.LENGTH_SHORT);
+    }
+
+    /**
+     * 长时间居中位置显示。
+     */
+    public static void showToastCenterLong(final int resId) {
+        showToastCenterLong(getString(resId));
+    }
+
+    /**
+     * 长时间居中位置显示。
+     */
+    public static void showToastCenterLong(final String str) {
+        showToast2Center(str, Toast.LENGTH_LONG);
+    }
+
+    /**
+     * 只定义一个Toast
+     */
+    private static Toast mToastCenter;
+
+    /**
+     * 对toast的简易封装。
+     */
+    private static void showToast2Center(String str, int showTime) {
+        if (appContext == null) {
+            throw new RuntimeException("DialogUIUtils not initialized!");
+        }
+        if (mToastCenter == null) {
+            mToastCenter = Toast.makeText(appContext, str, showTime);
+            mToastCenter.setGravity(Gravity.CENTER, 0, 0);
+        } else {
+            mToastCenter.show();
+        }
+    }
+
+    /**
+     * 获取文字
+     */
+    public static String getString(int resId) {
+        return appContext.getResources().getString(resId);
     }
 
 }
