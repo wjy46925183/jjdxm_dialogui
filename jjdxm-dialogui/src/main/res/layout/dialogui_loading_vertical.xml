@@ -8,8 +8,6 @@
         android:id="@+id/dialogui_ll_bg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/dialogui_margin_mid"
-        android:maxWidth="@dimen/dialogui_max_with"
         android:layout_centerInParent="true"
         android:background="@drawable/dialogui_shape_wihte_round_corner"
         android:gravity="center"

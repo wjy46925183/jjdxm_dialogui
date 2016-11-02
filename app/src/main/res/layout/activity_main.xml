@@ -42,6 +42,20 @@
                 android:layout_margin="5dp"
                 android:text="竖向 loading"/>
 
+            <Button
+                android:id="@+id/btn_md_loading_horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="MD 风格横向 loading"/>
+
+            <Button
+                android:id="@+id/btn_md_loading_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="MD 风格竖向 loading"/>
+
 
             <Button
                 android:id="@+id/btn_md_alert"

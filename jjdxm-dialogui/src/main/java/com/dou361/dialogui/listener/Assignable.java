@@ -46,6 +46,16 @@ public interface Assignable {
     BuildBean assignLoadingVertical(Context context, CharSequence msg, boolean cancleable, boolean outsideTouchable,boolean isWhiteBg);
 
     /**
+     * 横向加载框
+     */
+    BuildBean assignMdLoadingHorizontal(Context context, CharSequence msg, boolean cancleable, boolean outsideTouchable,boolean isWhiteBg);
+
+    /**
+     * 竖向加载框
+     */
+    BuildBean assignMdLoadingVertical(Context context, CharSequence msg, boolean cancleable, boolean outsideTouchable,boolean isWhiteBg);
+
+    /**
      * md风格弹出框
      */
     BuildBean assignMdAlert(Activity activity, CharSequence title, CharSequence msg,boolean cancleable, boolean outsideTouchable, final DialogUIListener listener);

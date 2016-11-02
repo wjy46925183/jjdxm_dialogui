@@ -135,6 +135,40 @@ public class DialogUIUtils {
     }
 
     /**
+     * md风格横向加载框 默认白色背景可取消可点击
+     *
+     * @param context 上下文
+     * @param msg     提示文本
+     */
+    public static BuildBean showMdLoadingHorizontal(Context context, CharSequence msg) {
+        return showMdLoadingHorizontal(context, msg, true, true, true);
+    }
+
+    /**
+     * md风格横向加载框 默认可取消可点击
+     *
+     * @param context   上下文
+     * @param msg       提示文本
+     * @param isWhiteBg true为白色背景false为灰色背景
+     */
+    public static BuildBean showMdLoadingHorizontal(Context context, CharSequence msg, boolean isWhiteBg) {
+        return showMdLoadingHorizontal(context, msg, true, true, isWhiteBg);
+    }
+
+    /**
+     * md风格横向加载框
+     *
+     * @param context          上下文
+     * @param msg              提示文本
+     * @param cancleable       true为可以取消false为不可取消
+     * @param outsideTouchable true为可以点击空白区域false为不可点击
+     * @param isWhiteBg        true为白色背景false为灰色背景
+     */
+    public static BuildBean showMdLoadingHorizontal(Context context, CharSequence msg, boolean cancleable, boolean outsideTouchable, boolean isWhiteBg) {
+        return DialogAssigner.getInstance().assignMdLoadingHorizontal(context, msg, cancleable, outsideTouchable, isWhiteBg);
+    }
+
+    /**
      * 竖向加载框  默认白色背景可取消可点击
      *
      * @param context 上下文
@@ -166,6 +200,40 @@ public class DialogUIUtils {
      */
     public static BuildBean showLoadingVertical(Context context, CharSequence msg, boolean cancleable, boolean outsideTouchable, boolean isWhiteBg) {
         return DialogAssigner.getInstance().assignLoadingVertical(context, msg, cancleable, outsideTouchable, isWhiteBg);
+    }
+
+    /**
+     * md风格竖向加载框  默认白色背景可取消可点击
+     *
+     * @param context 上下文
+     * @param msg     提示文本
+     */
+    public static BuildBean showMdLoadingVertical(Context context, CharSequence msg) {
+        return showMdLoadingVertical(context, msg, true, true, true);
+    }
+
+    /**
+     * md风格竖向加载框 默认可取消可点击
+     *
+     * @param context   上下文
+     * @param msg       提示文本
+     * @param isWhiteBg true为白色背景false为灰色背景
+     */
+    public static BuildBean showMdLoadingVertical(Context context, CharSequence msg, boolean isWhiteBg) {
+        return showMdLoadingVertical(context, msg, true, true, isWhiteBg);
+    }
+
+    /**
+     * md风格竖向加载框
+     *
+     * @param context          上下文
+     * @param msg              提示文本
+     * @param cancleable       true为可以取消false为不可取消
+     * @param outsideTouchable true为可以点击空白区域false为不可点击
+     * @param isWhiteBg        true为白色背景false为灰色背景
+     */
+    public static BuildBean showMdLoadingVertical(Context context, CharSequence msg, boolean cancleable, boolean outsideTouchable, boolean isWhiteBg) {
+        return DialogAssigner.getInstance().assignMdLoadingVertical(context, msg, cancleable, outsideTouchable, isWhiteBg);
     }
 
     /***

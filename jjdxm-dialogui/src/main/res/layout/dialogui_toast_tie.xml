@@ -9,13 +9,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:layout_margin="@dimen/dialogui_margin_mid"
         android:background="@drawable/dialogui_shape_wihte_round_corner"
         android:gravity="center"
         android:minHeight="60dp"
-        android:padding="8dp"
         android:minWidth="60dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="8dp">
 
         <TextView
             android:id="@+id/dialogui_tv_msg"

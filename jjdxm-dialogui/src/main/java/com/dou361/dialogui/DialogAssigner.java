@@ -68,6 +68,30 @@ public class DialogAssigner implements Assignable {
     }
 
     @Override
+    public BuildBean assignMdLoadingHorizontal(Context context, CharSequence msg, boolean cancleable, boolean outsideTouchable, boolean isWhiteBg) {
+        BuildBean bean = new BuildBean();
+        bean.context = context;
+        bean.msg = msg;
+        bean.isWhiteBg = isWhiteBg;
+        bean.cancelable = cancleable;
+        bean.outsideTouchable = outsideTouchable;
+        bean.type = CommonConfig.TYPE_MD_LOADING_HORIZONTAL;
+        return bean;
+    }
+
+    @Override
+    public BuildBean assignMdLoadingVertical(Context context, CharSequence msg, boolean cancleable, boolean outsideTouchable, boolean isWhiteBg) {
+        BuildBean bean = new BuildBean();
+        bean.context = context;
+        bean.msg = msg;
+        bean.isWhiteBg = isWhiteBg;
+        bean.cancelable = cancleable;
+        bean.outsideTouchable = outsideTouchable;
+        bean.type = CommonConfig.TYPE_MD_LOADING_VERTICAL;
+        return bean;
+    }
+
+    @Override
     public BuildBean assignMdAlert(Activity activity, CharSequence title, CharSequence msg, boolean cancleable, boolean outsideTouchable, DialogUIListener listener) {
         BuildBean bean = new BuildBean();
         bean.context = activity;

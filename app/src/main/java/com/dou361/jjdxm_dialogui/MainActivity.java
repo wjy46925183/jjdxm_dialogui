@@ -4,20 +4,14 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.Button;
 
 import com.dou361.dialogui.DialogUIUtils;
-import com.dou361.dialogui.adapter.SuperRcvAdapter;
-import com.dou361.dialogui.adapter.SuperRcvHolder;
 import com.dou361.dialogui.bottomsheet.BottomSheetBean;
 import com.dou361.dialogui.listener.DialogUIItemListener;
 import com.dou361.dialogui.listener.DialogUIListener;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import butterknife.ButterKnife;
@@ -41,43 +35,14 @@ public class MainActivity extends AppCompatActivity {
 
     String msg = "别总是来日方长，这世上挥手之间的都是人走茶凉。";
 
-    @OnClick({R.id.btn_toast, R.id.btn_loading_vertical, R.id.btn_loading_horizontal, R.id.btn_md_alert, R.id.btn_tie_alert, R.id.btn_alert_horizontal,
+    @OnClick({R.id.btn_toast, R.id.btn_loading_vertical, R.id.btn_loading_horizontal, R.id.btn_md_loading_vertical, R.id.btn_md_loading_horizontal, R.id.btn_md_alert, R.id.btn_tie_alert, R.id.btn_alert_horizontal,
             R.id.btn_alert_vertical, R.id.btn_bottom_sheet_cancel, R.id.btn_center_sheet, R.id.btn_alert_input,
             R.id.btn_alert_multichoose, R.id.btn_alert_singlechoose, R.id.btn_bottom_sheet, R.id.btn_md_bottom_vertical, R.id.btn_md_bottom_horizontal, R.id.btn_custom_alert})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_custom_alert:
-                String[] words3 = new String[]{"1", "2", "3"};
-                List<String> datas = Arrays.asList(words3);
-                RecyclerView recyclerView = new RecyclerView(this);
-                recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-                SuperRcvAdapter adapter = new SuperRcvAdapter(this) {
-                    @Override
-                    protected SuperRcvHolder generateCoustomViewHolder(int viewType) {
-
-                        return new SuperRcvHolder<String>(inflate(R.layout.holder_item_text)) {
-
-                            Button mButton;
-
-                            @Override
-                            public void assignDatasAndEvents(Activity context, final String data) {
-                                if (mButton == null) {
-                                    mButton = (Button) itemView.findViewById(R.id.btnee);
-                                }
-                                mButton.setText(data);
-                                mButton.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        showToast(data);
-                                    }
-                                });
-                            }
-                        };
-                    }
-                };
-                recyclerView.setAdapter(adapter);
-                adapter.addAll(datas);
-                DialogUIUtils.showCustomAlert(this, recyclerView).show();
+                View rootView = View.inflate(activity, R.layout.custom_dialog_layout, null);
+                DialogUIUtils.showCustomAlert(this, rootView).show();
                 break;
             case R.id.btn_toast:
                 DialogUIUtils.showToastTie(this, msg).show();
@@ -87,6 +52,12 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.btn_loading_horizontal:
                 DialogUIUtils.showLoadingHorizontal(this, "加载中...").show();
+                break;
+            case R.id.btn_md_loading_vertical:
+                DialogUIUtils.showMdLoadingVertical(this, "加载中...").show();
+                break;
+            case R.id.btn_md_loading_horizontal:
+                DialogUIUtils.showMdLoadingHorizontal(this, "加载中...").show();
                 break;
             case R.id.btn_md_alert:
                 DialogUIUtils.showMdAlert(activity, "标题", msg, new DialogUIListener() {
@@ -98,11 +69,6 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onNegative() {
                         showToast("onNegative");
-                    }
-
-                    @Override
-                    public void onNeutral() {
-                        showToast("onNeutral");
                     }
 
                 }).show();
@@ -119,11 +85,6 @@ public class MainActivity extends AppCompatActivity {
                         showToast("onNegative");
                     }
 
-                    @Override
-                    public void onNeutral() {
-                        showToast("onNeutral");
-                    }
-
                 }).show();
                 break;
             case R.id.btn_alert_horizontal:
@@ -138,11 +99,6 @@ public class MainActivity extends AppCompatActivity {
                         showToast("onNegative");
                     }
 
-                    @Override
-                    public void onNeutral() {
-                        showToast("onNeutral");
-                    }
-
                 }).show();
                 break;
             case R.id.btn_alert_vertical:
@@ -155,11 +111,6 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onNegative() {
                         showToast("onNegative");
-                    }
-
-                    @Override
-                    public void onNeutral() {
-                        showToast("onNeutral");
                     }
 
                 }).show();

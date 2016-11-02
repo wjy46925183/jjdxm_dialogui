@@ -60,7 +60,6 @@ public class Buildable {
         ToolUtils.fixContext(bean);
         switch (bean.type) {
             case CommonConfig.TYPE_TOAST_TIE:
-                ToolUtils.newCustomDialog(bean);
                 buildToastTie(bean);
                 break;
             case CommonConfig.TYPE_LOADING_HORIZONTAL:
@@ -70,6 +69,12 @@ public class Buildable {
             case CommonConfig.TYPE_LOADING_VERTICAL:
                 ToolUtils.newCustomDialog(bean);
                 buildLoadingVertical(bean);
+                break;
+            case CommonConfig.TYPE_MD_LOADING_HORIZONTAL:
+                buildMdLoadingHorizontal(bean);
+                break;
+            case CommonConfig.TYPE_MD_LOADING_VERTICAL:
+                buildMdLoadingVertical(bean);
                 break;
             case CommonConfig.TYPE_MD_ALERT:
                 buildMdAlert(bean);
@@ -81,15 +86,12 @@ public class Buildable {
                 buildMdMultiChoose(bean);
                 break;
             case CommonConfig.TYPE_ALERT:
-                ToolUtils.newCustomDialog(bean);
                 buildAlert(bean);
                 break;
             case CommonConfig.TYPE_ALERT_HORIZONTAL:
-                ToolUtils.newCustomDialog(bean);
                 buildAlertHorizontal(bean);
                 break;
             case CommonConfig.TYPE_ALERT_VERTICAL:
-                ToolUtils.newCustomDialog(bean);
                 buildAlertVertical(bean);
                 break;
             case CommonConfig.TYPE_BOTTOM_SHEET_CANCEL:
@@ -97,17 +99,13 @@ public class Buildable {
                 buildBottomSheetCancel(bean);
                 break;
             case CommonConfig.TYPE_ALERT_INPUT:
-                ToolUtils.newCustomDialog(bean);
                 buildAlertInput(bean);
                 break;
             case CommonConfig.TYPE_CENTER_SHEET:
-                ToolUtils.newCustomDialog(bean);
                 buildCenterSheet(bean);
                 break;
             case CommonConfig.TYPE_CUSTOM_ALERT:
-                ToolUtils.newCustomDialog(bean);
-                bean.dialog.setContentView(bean.customView);
-                bean.dialog.getWindow().setGravity(bean.gravity);
+                buildCustomAlert(bean);
                 break;
             case CommonConfig.TYPE_BOTTOM_SHEET:
                 buildBottomSheet(bean);
@@ -127,7 +125,6 @@ public class Buildable {
         ToolUtils.setCancelable(bean);
         return bean;
     }
-
 
     private void buildBottomSheet(final BuildBean bean) {
         final BottomSheetDialog dialog = new BottomSheetDialog(bean.context);
@@ -250,6 +247,7 @@ public class Buildable {
     }
 
     protected BuildBean buildToastTie(BuildBean bean) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(bean.context);
         View root = View.inflate(bean.context, R.layout.dialogui_toast_tie, null);
         View llBg = (View) root.findViewById(R.id.dialogui_ll_bg);
         TextView tvMsg = (TextView) root.findViewById(R.id.dialogui_tv_msg);
@@ -261,9 +259,60 @@ public class Buildable {
             llBg.setBackgroundResource(R.drawable.dialogui_shape_gray_round_corner);
             tvMsg.setTextColor(Color.WHITE);
         }
-        bean.dialog.setContentView(root);
-        bean.dialog.setCancelable(bean.cancelable);
-        bean.dialog.setCanceledOnTouchOutside(bean.outsideTouchable);
+        builder.setView(root);
+        AlertDialog dialog = builder.create();
+        bean.alertDialog = dialog;
+        bean.alertDialog.setCancelable(bean.cancelable);
+        bean.alertDialog.setCanceledOnTouchOutside(bean.outsideTouchable);
+        return bean;
+    }
+
+    protected BuildBean buildMdLoadingVertical(BuildBean bean) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(bean.context);
+        View root = View.inflate(bean.context, R.layout.dialogui_loading_vertical, null);
+        View llBg = (View) root.findViewById(R.id.dialogui_ll_bg);
+        ProgressBar pbBg = (ProgressBar) root.findViewById(R.id.pb_bg);
+        TextView tvMsg = (TextView) root.findViewById(R.id.dialogui_tv_msg);
+        tvMsg.setText(bean.msg);
+        if (bean.isWhiteBg) {
+            llBg.setBackgroundResource(R.drawable.dialogui_shape_wihte_round_corner);
+            pbBg.setIndeterminateDrawable(bean.context.getResources().getDrawable(R.drawable.dialogui_rotate_mum));
+            tvMsg.setTextColor(bean.context.getResources().getColor(R.color.text_black));
+        } else {
+            llBg.setBackgroundResource(R.drawable.dialogui_shape_gray_round_corner);
+            pbBg.setIndeterminateDrawable(bean.context.getResources().getDrawable(R.drawable.dialogui_rotate_mum_light));
+            tvMsg.setTextColor(Color.WHITE);
+        }
+        builder.setView(root);
+        AlertDialog dialog = builder.create();
+        bean.alertDialog = dialog;
+        bean.alertDialog.setCancelable(bean.cancelable);
+        bean.alertDialog.setCanceledOnTouchOutside(bean.outsideTouchable);
+        return bean;
+    }
+
+
+    protected BuildBean buildMdLoadingHorizontal(BuildBean bean) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(bean.context);
+        View root = View.inflate(bean.context, R.layout.dialogui_loading_horizontal, null);
+        View llBg = (View) root.findViewById(R.id.dialogui_ll_bg);
+        ProgressBar pbBg = (ProgressBar) root.findViewById(R.id.pb_bg);
+        TextView tvMsg = (TextView) root.findViewById(R.id.dialogui_tv_msg);
+        tvMsg.setText(bean.msg);
+        if (bean.isWhiteBg) {
+            llBg.setBackgroundResource(R.drawable.dialogui_shape_wihte_round_corner);
+            pbBg.setIndeterminateDrawable(bean.context.getResources().getDrawable(R.drawable.dialogui_shape_progress));
+            tvMsg.setTextColor(bean.context.getResources().getColor(R.color.text_black));
+        } else {
+            llBg.setBackgroundResource(R.drawable.dialogui_shape_gray_round_corner);
+            pbBg.setIndeterminateDrawable(bean.context.getResources().getDrawable(R.drawable.dialogui_shape_progress_light));
+            tvMsg.setTextColor(Color.WHITE);
+        }
+        builder.setView(root);
+        AlertDialog dialog = builder.create();
+        bean.alertDialog = dialog;
+        bean.alertDialog.setCancelable(bean.cancelable);
+        bean.alertDialog.setCanceledOnTouchOutside(bean.outsideTouchable);
         return bean;
     }
 
@@ -287,7 +336,6 @@ public class Buildable {
         bean.dialog.setCanceledOnTouchOutside(bean.outsideTouchable);
         return bean;
     }
-
 
     protected BuildBean buildLoadingHorizontal(BuildBean bean) {
         View root = View.inflate(bean.context, R.layout.dialogui_loading_horizontal, null);
@@ -434,14 +482,26 @@ public class Buildable {
         return bean;
     }
 
+    private void buildCustomAlert(BuildBean bean) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(bean.context);
+        builder.setView(bean.customView);
+        AlertDialog dialog = builder.create();
+        bean.alertDialog = dialog;
+        bean.alertDialog.setCancelable(bean.cancelable);
+        bean.alertDialog.setCanceledOnTouchOutside(bean.outsideTouchable);
+        bean.alertDialog.getWindow().setGravity(bean.gravity);
+    }
+
     protected BuildBean buildCenterSheet(BuildBean bean) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(bean.context);
         CenterSheetHolder holder = new CenterSheetHolder(bean.context);
-        bean.dialog.setContentView(holder.rootView);
-        bean.dialog.setCancelable(bean.cancelable);
-        bean.dialog.setCanceledOnTouchOutside(bean.outsideTouchable);
+        builder.setView(holder.rootView);
+        AlertDialog dialog = builder.create();
+        bean.alertDialog = dialog;
+        bean.alertDialog.setCancelable(bean.cancelable);
+        bean.alertDialog.setCanceledOnTouchOutside(bean.outsideTouchable);
         holder.assingDatasAndEvents(bean.context, bean);
-        bean.viewHeight = ToolUtils.mesureHeight(holder.rootView, holder.lv);
-        Window window = bean.dialog.getWindow();
+        Window window = bean.alertDialog.getWindow();
         window.setGravity(Gravity.CENTER);
         return bean;
     }
@@ -455,7 +515,7 @@ public class Buildable {
         bean.viewHeight = ToolUtils.mesureHeight(holder.rootView, holder.lv);
         Window window = bean.dialog.getWindow();
         window.setGravity(Gravity.BOTTOM);
-        window.setWindowAnimations(R.style.mystyle);
+        window.setWindowAnimations(R.style.dialogui_bottom_style);
         return bean;
     }
 
@@ -466,13 +526,14 @@ public class Buildable {
     }
 
     private BuildBean buildCommon(BuildBean bean) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(bean.context);
         AlertDialogHolder holder = new AlertDialogHolder(bean.context);
-        bean.dialog.setContentView(holder.rootView);
-        bean.dialog.setCancelable(bean.cancelable);
-        bean.dialog.setCanceledOnTouchOutside(bean.outsideTouchable);
+        builder.setView(holder.rootView);
+        AlertDialog dialog = builder.create();
+        bean.alertDialog = dialog;
+        bean.alertDialog.setCancelable(bean.cancelable);
+        bean.alertDialog.setCanceledOnTouchOutside(bean.outsideTouchable);
         holder.assingDatasAndEvents(bean.context, bean);
-        int height = ToolUtils.mesureHeight(holder.rootView, holder.tvMsg, holder.et1, holder.et2);
-        bean.viewHeight = height;
         return bean;
 
     }

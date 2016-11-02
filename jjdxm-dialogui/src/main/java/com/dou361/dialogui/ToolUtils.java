@@ -123,7 +123,7 @@ public class ToolUtils {
         // 以下这两句是为了保证按钮可以水平满屏
         int width = ((WindowManager) activity.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getWidth();
         int height = (int) (((WindowManager) activity.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getHeight() * 0.9);
-        if (bean.type != CommonConfig.TYPE_LOADING_VERTICAL) {
+        if (bean.type != CommonConfig.TYPE_MD_LOADING_VERTICAL) {
             wl.width = (int) (width * 0.94);  // todo keycode to keep gap
         } else {
             wl.width = ViewGroup.LayoutParams.WRAP_CONTENT;

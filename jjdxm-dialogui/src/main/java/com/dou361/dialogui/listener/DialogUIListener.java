@@ -5,24 +5,38 @@ package com.dou361.dialogui.listener;
  */
 public abstract class DialogUIListener {
 
-    /**确定*/
+    /**
+     * 确定
+     */
     public abstract void onPositive();
-    /**否定*/
+
+    /**
+     * 否定
+     */
     public abstract void onNegative();
-    /**中立*/
-    public void onNeutral(){}
-    /**取消*/
-    public void onCancle(){}
 
-    public void onGetInput(CharSequence input1,CharSequence input2){
-
+    /**
+     * 中立
+     */
+    public void onNeutral() {
     }
 
-    public void onGetChoose(int chosen,CharSequence chosenTxt){
-
+    /**
+     * 取消
+     */
+    public void onCancle() {
     }
 
-    public void onGetChoose(boolean[] states){
+    /**
+     * 获取输入内容
+     */
+    public void onGetInput(CharSequence input1, CharSequence input2) {
+    }
+
+    /**
+     * 获取选择集合
+     */
+    public void onGetChoose(boolean[] states) {
 
     }
 

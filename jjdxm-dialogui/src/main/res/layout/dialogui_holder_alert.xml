@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="wrap_content"
+              android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:layout_margin="@dimen/dialogui_margin_mid"
               android:background="@drawable/dialogui_shape_wihte_round_corner"
               android:gravity="center_horizontal"
-              android:maxWidth="@dimen/dialogui_max_with"
               android:orientation="vertical">
 
     <TextView
@@ -19,7 +17,7 @@
         android:paddingLeft="40dp"
         android:paddingRight="40dp"
         android:paddingTop="12dp"
-        android:text="支持自定义边框圆角、背景透明度、字体大小与色值等。 列表选择框可以接收List与Arrays的数据源，详细见demo"
+        android:text=""
         android:textColor="@color/text_title_11"
         android:textSize="@dimen/dialogui_title_txt_size"
         android:textStyle="bold"/>
@@ -47,7 +45,7 @@
                 android:paddingLeft="30dp"
                 android:paddingRight="30dp"
                 android:paddingTop="5dp"
-                android:text="支持"
+                android:text=""
                 android:textColor="@color/text_msg_33"
                 android:textSize="@dimen/dialogui_msg_txt_size"/>
 
