@@ -116,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
                 }).show();
                 break;
             case R.id.btn_bottom_sheet_cancel: {
-                final List<String> strings = new ArrayList<>();
+                List<String> strings = new ArrayList<>();
                 strings.add("1");
                 strings.add("2");
                 strings.add("3");
@@ -134,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
             }
             break;
             case R.id.btn_center_sheet:
-                final List<String> strings = new ArrayList<>();
+                List<String> strings = new ArrayList<>();
                 strings.add("1");
                 strings.add("2");
                 strings.add("3");
@@ -204,7 +204,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onItemClick(CharSequence text, int position) {
 
                     }
-                }).show();//不好建立回
+                }).show();
                 break;
             case R.id.btn_md_bottom_vertical:
                 List<BottomSheetBean> datas2 = new ArrayList<>();

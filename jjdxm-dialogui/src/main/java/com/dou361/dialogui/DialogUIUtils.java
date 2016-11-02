@@ -399,104 +399,214 @@ public class DialogUIUtils {
 
     /**
      * 中间弹出列表 默认可取消可点击
+     *
+     * @param context  上下文
+     * @param words    素组集合
+     * @param listener 事件监听
+     * @return
      */
     public static BuildBean showCenterSheet(Context context, List<? extends CharSequence> words, DialogUIItemListener listener) {
         return showCenterSheet(context, words, true, true, listener);
     }
 
-    /**
+    /***
      * 中间弹出列表
+     *
+     * @param context          上下文
+     * @param words            素组集合
+     * @param cancleable       true为可以取消false为不可取消
+     * @param outsideTouchable true为可以点击空白区域false为不可点击
+     * @param listener         事件监听
+     * @return
      */
     public static BuildBean showCenterSheet(Context context, List<? extends CharSequence> words, boolean cancleable, boolean outsideTouchable, DialogUIItemListener listener) {
         return DialogAssigner.getInstance().assignCenterSheet(context, words, cancleable, outsideTouchable, listener);
     }
 
     /**
-     * 带取消的底部弹出列表
+     * 带取消的底部弹出列表 默认可取消可点击
+     *
+     * @param context   上下文
+     * @param words     素组集合
+     * @param bottomTxt 底部按钮文本
+     * @param listener  事件监听
+     * @return
      */
     public static BuildBean showBottomSheetAndCancel(Context context, List<? extends CharSequence> words, CharSequence bottomTxt, DialogUIItemListener listener) {
         return showBottomSheetAndCancel(context, words, bottomTxt, true, true, listener);
     }
 
-    /**
+    /***
      * 带取消的底部弹出列表
+     *
+     * @param context          上下文
+     * @param words            素组集合
+     * @param bottomTxt        底部按钮文本
+     * @param cancleable       true为可以取消false为不可取消
+     * @param outsideTouchable true为可以点击空白区域false为不可点击
+     * @param listener         事件监听
+     * @return
      */
     public static BuildBean showBottomSheetAndCancel(Context context, List<? extends CharSequence> words, CharSequence bottomTxt, boolean cancleable, boolean outsideTouchable, DialogUIItemListener listener) {
         return DialogAssigner.getInstance().assignBottomSheetAndCancel(context, words, bottomTxt, cancleable, outsideTouchable, listener);
     }
 
     /**
-     * 底部弹出列表
+     * 底部弹出列表 默认可取消可点击
+     *
+     * @param context  上下文
+     * @param datas    集合需要BottomSheetBean对象
+     * @param listener 事件监听
+     * @return
      */
     public static BuildBean showBottomSheet(Activity context, List datas, DialogUIItemListener listener) {
         return showBottomSheet(context, datas, true, true, listener);
     }
 
-    /**
+    /***
      * 底部弹出列表
+     *
+     * @param context          上下文
+     * @param datas            集合需要BottomSheetBean对象
+     * @param cancleable       true为可以取消false为不可取消
+     * @param outsideTouchable true为可以点击空白区域false为不可点击
+     * @param listener         事件监听
+     * @return
      */
     public static BuildBean showBottomSheet(Activity context, List datas, boolean cancleable, boolean outsideTouchable, DialogUIItemListener listener) {
         return DialogAssigner.getInstance().assignBottomSheet(context, datas, cancleable, outsideTouchable, listener);
     }
 
     /**
-     * 输入框
+     * 输入框 默认可取消可点击
+     *
+     * @param context   上下文
+     * @param title     标题
+     * @param hint1     第一个文本框提示语
+     * @param hint2     第二个文本框提示语
+     * @param firstTxt  第一个按钮文本
+     * @param secondTxt 第二个按钮文本
+     * @param listener  事件监听
+     * @return
      */
     public static BuildBean showAlertInput(Context context, CharSequence title, CharSequence hint1, CharSequence hint2, CharSequence firstTxt, CharSequence secondTxt, DialogUIListener listener) {
         return showAlertInput(context, title, hint1, hint2, firstTxt, secondTxt, true, true, listener);
     }
 
-    /**
+    /***
      * 输入框
+     *
+     * @param context          上下文
+     * @param title            标题
+     * @param hint1            第一个文本框提示语
+     * @param hint2            第二个文本框提示语
+     * @param firstTxt         第一个按钮文本
+     * @param secondTxt        第二个按钮文本
+     * @param cancleable       true为可以取消false为不可取消
+     * @param outsideTouchable true为可以点击空白区域false为不可点击
+     * @param listener         事件监听
+     * @return
      */
     public static BuildBean showAlertInput(Context context, CharSequence title, CharSequence hint1, CharSequence hint2, CharSequence firstTxt, CharSequence secondTxt, boolean cancleable, boolean outsideTouchable, DialogUIListener listener) {
         return DialogAssigner.getInstance().assignAlertInput(context, title, hint1, hint2, firstTxt, secondTxt, cancleable, outsideTouchable, listener);
     }
 
     /**
-     * md风格竖向底部弹出列表
+     * md风格竖向底部弹出列表 默认可取消可点击
+     *
+     * @param context   上下文
+     * @param title     标题
+     * @param datas     集合需要BottomSheetBean对象
+     * @param bottomTxt 底部item文本
+     * @param listener  事件监听
+     * @return
      */
     public static BuildBean showMdBottomSheetVertical(Context context, CharSequence title, List datas, CharSequence bottomTxt, DialogUIItemListener listener) {
         return showMdBottomSheetVertical(context, title, datas, bottomTxt, true, true, listener);
     }
 
-    /**
+    /***
      * md风格竖向底部弹出列表
+     *
+     * @param context          上下文
+     * @param title            标题
+     * @param datas            集合需要BottomSheetBean对象
+     * @param bottomTxt        底部item文本
+     * @param cancleable       true为可以取消false为不可取消
+     * @param outsideTouchable true为可以点击空白区域false为不可点击
+     * @param listener         事件监听
+     * @return
      */
     public static BuildBean showMdBottomSheetVertical(Context context, CharSequence title, List datas, CharSequence bottomTxt, boolean cancleable, boolean outsideTouchable, DialogUIItemListener listener) {
         return DialogAssigner.getInstance().assignMdBottomSheetVertical(context, title, datas, bottomTxt, cancleable, outsideTouchable, listener);
     }
 
     /**
-     * md风格横向底部弹出列表
+     * md风格横向底部弹出列表 默认可取消可点击
+     *
+     * @param context          上下文
+     * @param title            标题
+     * @param datas            集合需要BottomSheetBean对象
+     * @param bottomTxt        底部item文本
+     * @param columnsNum       列数量
+     * @param cancleable       true为可以取消false为不可取消
+     * @param outsideTouchable true为可以点击空白区域false为不可点击
+     * @param listener         事件监听
+     * @return
      */
     public static BuildBean showMdBottomSheetHorizontal(Context context, CharSequence title, List datas, CharSequence bottomTxt, int columnsNum, DialogUIItemListener listener) {
         return showMdBottomSheetHorizontal(context, title, datas, bottomTxt, columnsNum, true, true, listener);
     }
 
-    /**
+    /***
      * md风格横向底部弹出列表
+     *
+     * @param context          上下文
+     * @param title            标题
+     * @param datas            集合需要BottomSheetBean对象
+     * @param bottomTxt        底部item文本
+     * @param columnsNum       列数量
+     * @param cancleable       true为可以取消false为不可取消
+     * @param outsideTouchable true为可以点击空白区域false为不可点击
+     * @param listener         事件监听
+     * @return
      */
     public static BuildBean showMdBottomSheetHorizontal(Context context, CharSequence title, List datas, CharSequence bottomTxt, int columnsNum, boolean cancleable, boolean outsideTouchable, DialogUIItemListener listener) {
         return DialogAssigner.getInstance().assignMdBottomSheetHorizontal(context, title, datas, bottomTxt, columnsNum, cancleable, outsideTouchable, listener);
     }
 
     /**
-     * 自定义弹出框
+     * 自定义弹出框 默认居中可取消可点击
+     *
+     * @param context     上下问
+     * @param contentView 自定义view
+     * @return
      */
     public static BuildBean showCustomAlert(Context context, View contentView) {
         return showCustomAlert(context, contentView, Gravity.CENTER, true, true);
     }
 
     /**
-     * 自定义弹出框
+     * 自定义弹出框 默认可取消可点击
+     *
+     * @param context     上下文
+     * @param contentView 自定义view
+     * @param gravity     显示window的位置例如Gravity.center
+     * @return
      */
     public static BuildBean showCustomAlert(Context context, View contentView, int gravity) {
         return showCustomAlert(context, contentView, gravity, true, true);
     }
 
-    /**
+    /***
      * 自定义弹出框
+     *
+     * @param context          上下文
+     * @param contentView      自定义view
+     * @param gravity          显示window的位置例如Gravity.center
+     * @param cancleable       true为可以取消false为不可取消
+     * @param outsideTouchable true为可以点击空白区域false为不可点击
+     * @return
      */
     public static BuildBean showCustomAlert(Context context, View contentView, int gravity, boolean cancleable, boolean outsideTouchable) {
         return DialogAssigner.getInstance().assignCustomAlert(context, contentView, gravity, cancleable, outsideTouchable);

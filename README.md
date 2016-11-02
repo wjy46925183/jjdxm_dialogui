@@ -22,9 +22,18 @@
 
 ## Screenshots ##
 
+<img src="https://raw.githubusercontent.com/jjdxmashl/jjdxm_dialogui/master/screenshots/icon01.gif" width="300"> 
+<img src="https://raw.githubusercontent.com/jjdxmashl/jjdxm_dialogui/master/screenshots/icon02.gif" width="600">
 <img src="https://raw.githubusercontent.com/jjdxmashl/jjdxm_dialogui/master/screenshots/icon01.png" width="300"> 
 <img src="https://raw.githubusercontent.com/jjdxmashl/jjdxm_dialogui/master/screenshots/icon02.png" width="300"> 
- 
+ <img src="https://raw.githubusercontent.com/jjdxmashl/jjdxm_dialogui/master/screenshots/icon03.png" width="300"> 
+<img src="https://raw.githubusercontent.com/jjdxmashl/jjdxm_dialogui/master/screenshots/icon04.png" width="300">
+<img src="https://raw.githubusercontent.com/jjdxmashl/jjdxm_dialogui/master/screenshots/icon05.png" width="300"> 
+<img src="https://raw.githubusercontent.com/jjdxmashl/jjdxm_dialogui/master/screenshots/icon06.png" width="300"> 
+ <img src="https://raw.githubusercontent.com/jjdxmashl/jjdxm_dialogui/master/screenshots/icon07.png" width="300"> 
+<img src="https://raw.githubusercontent.com/jjdxmashl/jjdxm_dialogui/master/screenshots/icon08.png" width="300">
+ <img src="https://raw.githubusercontent.com/jjdxmashl/jjdxm_dialogui/master/screenshots/icon09.png" width="300"> 
+<img src="https://raw.githubusercontent.com/jjdxmashl/jjdxm_dialogui/master/screenshots/icon10.png" width="300">
 ## Download ##
 
 [demo apk下载][downapk]
@@ -44,6 +53,7 @@ or Gradle:
 
 历史版本：
 
+	compile 'com.dou361.dialogui:jjdxm-dialogui:1.0.1'
 	compile 'com.dou361.dialogui:jjdxm-dialogui:1.0.0'
 
 jjdxm-dialogui requires at minimum Java 9 or Android 2.3.
@@ -63,6 +73,714 @@ jjdxm-dialogui requires at minimum Java 9 or Android 2.3.
 [AndroidStudio代码混淆注意的问题][minify]
 
 ## Get Started ##
+
+### step1 ###
+如果需要使用toast类，采用单例模式的，多次调用toast后只会显示一个，需要初始化DialogUIUtils类，否则会抛异常，使用前初始化即可，代码如下
+
+	DialogUIUtils.init(appContext);
+
+### step2 ###
+如果不需要使用toast类，可以不操作step1，直接使用相对于的弹出框即可。以下分别是部分弹出框的调用代码案例。
+
+#### 自定义弹出框 ####
+
+    /**
+     * 自定义弹出框 默认居中可取消可点击
+     *
+     * @param context     上下问
+     * @param contentView 自定义view
+     * @return
+     */
+    public static BuildBean showCustomAlert(Context context, View contentView)
+
+    /**
+     * 自定义弹出框 默认可取消可点击
+     *
+     * @param context     上下文
+     * @param contentView 自定义view
+     * @param gravity     显示window的位置例如Gravity.center
+     * @return
+     */
+    public static BuildBean showCustomAlert(Context context, View contentView, int gravity)
+
+    /***
+     * 自定义弹出框
+     *
+     * @param context          上下文
+     * @param contentView      自定义view
+     * @param gravity          显示window的位置例如Gravity.center
+     * @param cancleable       true为可以取消false为不可取消
+     * @param outsideTouchable true为可以点击空白区域false为不可点击
+     * @return
+     */
+    public static BuildBean showCustomAlert(Context context, View contentView, int gravity, boolean cancleable, boolean outsideTouchable)
+
+具体使用
+
+	View rootView = View.inflate(activity, R.layout.custom_dialog_layout, null);
+	DialogUIUtils.showCustomAlert(this, rootView).show();
+
+#### 弹出toast ####
+
+	/**
+     * 弹出toast 默认白色背景可取消可点击
+     *
+     * @param context 上下文
+     * @param msg     提示文本
+     */
+    public static BuildBean showToastTie(Context context, CharSequence msg) 
+
+    /**
+     * 弹出toast 默认可取消可点击
+     *
+     * @param context   上下文
+     * @param msg       提示文本
+     * @param isWhiteBg true为白色背景false为灰色背景
+     */
+    public static BuildBean showToastTie(Context context, CharSequence msg, boolean isWhiteBg) 
+
+    /**
+     * 弹出toast
+     *
+     * @param context          上下文
+     * @param msg              提示文本
+     * @param cancleable       true为可以取消false为不可取消
+     * @param outsideTouchable true为可以点击空白区域false为不可点击
+     * @param isWhiteBg        true为白色背景false为灰色背景
+     */
+    public static BuildBean showToastTie(Context context, CharSequence msg, boolean cancleable, boolean outsideTouchable, boolean isWhiteBg)
+
+具体使用
+
+	DialogUIUtils.showToastTie(this, "加载中...").show();
+
+#### 横向加载框 ####
+
+    /**
+     * 横向加载框 默认白色背景可取消可点击
+     *
+     * @param context 上下文
+     * @param msg     提示文本
+     */
+    public static BuildBean showLoadingHorizontal(Context context, CharSequence msg)
+
+    /**
+     * 横向加载框 默认可取消可点击
+     *
+     * @param context   上下文
+     * @param msg       提示文本
+     * @param isWhiteBg true为白色背景false为灰色背景
+     */
+    public static BuildBean showLoadingHorizontal(Context context, CharSequence msg, boolean isWhiteBg)
+
+    /**
+     * 横向加载框
+     *
+     * @param context          上下文
+     * @param msg              提示文本
+     * @param cancleable       true为可以取消false为不可取消
+     * @param outsideTouchable true为可以点击空白区域false为不可点击
+     * @param isWhiteBg        true为白色背景false为灰色背景
+     */
+    public static BuildBean showLoadingHorizontal(Context context, CharSequence msg, boolean cancleable, boolean outsideTouchable, boolean isWhiteBg)
+
+具体使用
+
+	DialogUIUtils.showLoadingHorizontal(this, "加载中...").show();
+
+#### md风格横向加载框 ####
+
+    /**
+     * md风格横向加载框 默认白色背景可取消可点击
+     *
+     * @param context 上下文
+     * @param msg     提示文本
+     */
+    public static BuildBean showMdLoadingHorizontal(Context context, CharSequence msg)
+
+    /**
+     * md风格横向加载框 默认可取消可点击
+     *
+     * @param context   上下文
+     * @param msg       提示文本
+     * @param isWhiteBg true为白色背景false为灰色背景
+     */
+    public static BuildBean showMdLoadingHorizontal(Context context, CharSequence msg, boolean isWhiteBg) 
+
+    /**
+     * md风格横向加载框
+     *
+     * @param context          上下文
+     * @param msg              提示文本
+     * @param cancleable       true为可以取消false为不可取消
+     * @param outsideTouchable true为可以点击空白区域false为不可点击
+     * @param isWhiteBg        true为白色背景false为灰色背景
+     */
+    public static BuildBean showMdLoadingHorizontal(Context context, CharSequence msg, boolean cancleable, boolean outsideTouchable, boolean isWhiteBg) 
+
+具体使用
+
+	DialogUIUtils.showMdLoadingHorizontal(this, "加载中...").show();
+
+#### 竖向加载框 ####
+
+    /**
+     * 竖向加载框  默认白色背景可取消可点击
+     *
+     * @param context 上下文
+     * @param msg     提示文本
+     */
+    public static BuildBean showLoadingVertical(Context context, CharSequence msg) 
+
+    /**
+     * 竖向加载框 默认可取消可点击
+     *
+     * @param context   上下文
+     * @param msg       提示文本
+     * @param isWhiteBg true为白色背景false为灰色背景
+     */
+    public static BuildBean showLoadingVertical(Context context, CharSequence msg, boolean isWhiteBg) 
+
+    /**
+     * 竖向加载框
+     *
+     * @param context          上下文
+     * @param msg              提示文本
+     * @param cancleable       true为可以取消false为不可取消
+     * @param outsideTouchable true为可以点击空白区域false为不可点击
+     * @param isWhiteBg        true为白色背景false为灰色背景
+     */
+    public static BuildBean showLoadingVertical(Context context, CharSequence msg, boolean cancleable, boolean outsideTouchable, boolean isWhiteBg) 
+
+具体使用
+
+	DialogUIUtils.showLoadingVertical(this, "加载中...").show();
+
+#### md风格竖向加载框 ####
+
+    /**
+     * md风格竖向加载框  默认白色背景可取消可点击
+     *
+     * @param context 上下文
+     * @param msg     提示文本
+     */
+    public static BuildBean showMdLoadingVertical(Context context, CharSequence msg)
+
+    /**
+     * md风格竖向加载框 默认可取消可点击
+     *
+     * @param context   上下文
+     * @param msg       提示文本
+     * @param isWhiteBg true为白色背景false为灰色背景
+     */
+    public static BuildBean showMdLoadingVertical(Context context, CharSequence msg, boolean isWhiteBg)
+
+    /**
+     * md风格竖向加载框
+     *
+     * @param context          上下文
+     * @param msg              提示文本
+     * @param cancleable       true为可以取消false为不可取消
+     * @param outsideTouchable true为可以点击空白区域false为不可点击
+     * @param isWhiteBg        true为白色背景false为灰色背景
+     */
+    public static BuildBean showMdLoadingVertical(Context context, CharSequence msg, boolean cancleable, boolean outsideTouchable, boolean isWhiteBg)
+
+
+具体使用
+
+	DialogUIUtils.showMdLoadingVertical(this, "加载中...").show();
+
+#### md风格弹出框 ####
+
+    /***
+     * md风格弹出框 默认可取消可点击
+     *
+     * @param activity 所在activity
+     * @param title    标题 不传则无标题
+     * @param msg      消息
+     * @param listener 事件监听
+     * @return
+     */
+    public static BuildBean showMdAlert(Activity activity, CharSequence title, CharSequence msg, DialogUIListener listener)
+
+    /***
+     * md风格弹出框
+     *
+     * @param activity         所在activity
+     * @param title            标题 不传则无标题
+     * @param msg              消息
+     * @param cancleable       true为可以取消false为不可取消
+     * @param outsideTouchable true为可以点击空白区域false为不可点击
+     * @param listener         事件监听
+     * @return
+     */
+    public static BuildBean showMdAlert(Activity activity, CharSequence title, CharSequence msg, boolean cancleable, boolean outsideTouchable, DialogUIListener listener)
+
+具体使用
+
+	DialogUIUtils.showMdAlert(activity, "标题", "文本内容", new DialogUIListener() {
+                    @Override
+                    public void onPositive() {
+                        
+                    }
+
+                    @Override
+                    public void onNegative() {
+                        
+                    }
+
+                }).show();
+
+#### md风格多选框 ####
+
+    /**
+     * md风格多选框  默认可取消可点击
+     *
+     * @param activity     所在activity
+     * @param title        标题 不传则无标题
+     * @param words        消息数组
+     * @param checkedItems 默认选中项
+     * @param listener     事件监听
+     */
+    public static BuildBean showMdMultiChoose(Activity activity, CharSequence title, CharSequence[] words, boolean[] checkedItems, DialogUIListener listener)
+
+    /***
+     * md风格多选框
+     *
+     * @param activity         所在activity
+     * @param title            标题 不传则无标题
+     * @param words            消息数组
+     * @param checkedItems     默认选中项
+     * @param cancleable       true为可以取消false为不可取消
+     * @param outsideTouchable true为可以点击空白区域false为不可点击
+     * @param listener         事件监听
+     * @return
+     */
+    public static BuildBean showMdMultiChoose(Activity activity, CharSequence title, CharSequence[] words, boolean[] checkedItems, boolean cancleable, boolean outsideTouchable, DialogUIListener listener)
+
+具体使用
+
+	String[] words = new String[]{"1", "2", "3"};
+                boolean[] choseDefault = new boolean[]{false, false, false};
+                DialogUIUtils.showMdMultiChoose(activity, "标题", words, choseDefault, new DialogUIListener() {
+                    @Override
+                    public void onPositive() {
+
+                    }
+
+                    @Override
+                    public void onNegative() {
+
+                    }
+                }).show();
+
+#### 单选框 ####
+
+    /**
+     * 单选框  默认可取消可点击
+     *
+     * @param activity      所在activity
+     * @param title         标题 不传则无标题
+     * @param defaultChosen 默认选中项
+     * @param words         消息数组
+     * @param listener      事件监听
+     */
+    public static BuildBean showSingleChoose(Activity activity, CharSequence title, int defaultChosen, CharSequence[] words, DialogUIItemListener listener) 
+
+    /**
+     * 单选框
+     *
+     * @param activity         所在activity
+     * @param title            标题 不传则无标题
+     * @param defaultChosen    默认选中项
+     * @param words            消息数组
+     * @param cancleable       true为可以取消false为不可取消
+     * @param outsideTouchable true为可以点击空白区域false为不可点击
+     * @param listener         事件监听
+     */
+    public static BuildBean showSingleChoose(Activity activity, CharSequence title, int defaultChosen, CharSequence[] words, boolean cancleable, boolean outsideTouchable, DialogUIItemListener listener) 
+
+具体使用
+
+	String[] words2 = new String[]{"1", "2", "3"};
+	                DialogUIUtils.showSingleChoose(activity, "单选", 0, words2, new DialogUIItemListener() {
+	                    @Override
+	                    public void onItemClick(CharSequence text, int position) {
+	                        showToast(text + "--" + position);
+	                    }
+	                }).show();
+
+#### 提示弹出框 ####
+
+    /**
+     * 提示弹出框 默认可取消可点击
+     *
+     * @param activity 所在activity
+     * @param title    标题 不传则无标题
+     * @param listener 事件监听
+     */
+    public static BuildBean showAlert(Activity activity, CharSequence title, CharSequence msg, DialogUIListener listener)
+
+    /**
+     * 提示弹出框
+     *
+     * @param activity         所在activity
+     * @param title            标题 不传则无标题
+     * @param cancleable       true为可以取消false为不可取消
+     * @param outsideTouchable true为可以点击空白区域false为不可点击
+     * @param listener         事件监听
+     */
+    public static BuildBean showAlert(Activity activity, CharSequence title, CharSequence msg, boolean cancleable, boolean outsideTouchable, DialogUIListener listener)
+
+具体使用
+
+	DialogUIUtils.showAlert(activity, "标题", "文本内容", new DialogUIListener() {
+                    @Override
+                    public void onPositive() {
+                        
+                    }
+
+                    @Override
+                    public void onNegative() {
+                        
+                    }
+
+                }).show();
+
+#### 横向弹出框 ####
+
+    /**
+     * 横向弹出框  默认可取消可点击
+     *
+     * @param activity 所在activity
+     * @param title    标题 不传则无标题
+     * @param msg      消息
+     * @param listener 事件监听
+     */
+    public static BuildBean showAlertHorizontal(Context activity, CharSequence title, CharSequence msg, DialogUIListener listener) 
+
+    /**
+     * 横向弹出框
+     *
+     * @param activity         所在activity
+     * @param title            标题 不传则无标题
+     * @param msg              消息
+     * @param cancleable       true为可以取消false为不可取消
+     * @param outsideTouchable true为可以点击空白区域false为不可点击
+     * @param listener         事件监听
+     */
+    public static BuildBean showAlertHorizontal(Context activity, CharSequence title, CharSequence msg, boolean cancleable, boolean outsideTouchable, DialogUIListener listener)
+
+具体使用
+
+	DialogUIUtils.showAlertHorizontal(activity, "标题", "文本内容", new DialogUIListener() {
+                    @Override
+                    public void onPositive() {
+                        
+                    }
+
+                    @Override
+                    public void onNegative() {
+                        
+                    }
+
+                }).show();
+
+#### 竖向弹出框 ####
+
+    /**
+     * 竖向弹出框  默认可取消可点击
+     *
+     * @param activity 所在activity
+     * @param title    标题 不传则无标题
+     * @param msg      消息
+     * @param listener 事件监听
+     */
+    public static BuildBean showAlertVertical(Context activity, CharSequence title, CharSequence msg, DialogUIListener listener)
+
+    /**
+     * 竖向弹出框
+     *
+     * @param activity         所在activity
+     * @param title            标题 不传则无标题
+     * @param msg              消息
+     * @param cancleable       true为可以取消false为不可取消
+     * @param outsideTouchable true为可以点击空白区域false为不可点击
+     * @param listener         事件监听
+     */
+    public static BuildBean showAlertVertical(Context activity, CharSequence title, CharSequence msg, boolean cancleable, boolean outsideTouchable, DialogUIListener listener)
+
+具体使用
+
+	DialogUIUtils.showAlertVertical(activity, "标题", "文本内容", new DialogUIListener() {
+                    @Override
+                    public void onPositive() {
+                        
+                    }
+
+                    @Override
+                    public void onNegative() {
+                        
+                    }
+
+                }).show();
+
+#### 中间弹出列表 ####
+
+    /**
+     * 中间弹出列表 默认可取消可点击
+     *
+     * @param context  上下文
+     * @param words    素组集合
+     * @param listener 事件监听
+     * @return
+     */
+    public static BuildBean showCenterSheet(Context context, List<? extends CharSequence> words, DialogUIItemListener listener)
+
+    /***
+     * 中间弹出列表
+     *
+     * @param context          上下文
+     * @param words            素组集合
+     * @param cancleable       true为可以取消false为不可取消
+     * @param outsideTouchable true为可以点击空白区域false为不可点击
+     * @param listener         事件监听
+     * @return
+     */
+    public static BuildBean showCenterSheet(Context context, List<? extends CharSequence> words, boolean cancleable, boolean outsideTouchable, DialogUIItemListener listener)
+
+具体使用
+
+	List<String> strings = new ArrayList<>();
+                strings.add("1");
+                strings.add("2");
+                strings.add("3");
+                DialogUIUtils.showCenterSheet(activity, strings, new DialogUIItemListener() {
+                    @Override
+                    public void onItemClick(CharSequence text, int position) {
+                    }
+
+                    @Override
+                    public void onBottomBtnClick() {
+                    }
+                }).show();
+
+#### 带取消的底部弹出列表 ####
+
+    /**
+     * 带取消的底部弹出列表 默认可取消可点击
+     *
+     * @param context   上下文
+     * @param words     素组集合
+     * @param bottomTxt 底部按钮文本
+     * @param listener  事件监听
+     * @return
+     */
+    public static BuildBean showBottomSheetAndCancel(Context context, List<? extends CharSequence> words, CharSequence bottomTxt, DialogUIItemListener listener)
+
+    /***
+     * 带取消的底部弹出列表
+     *
+     * @param context          上下文
+     * @param words            素组集合
+     * @param bottomTxt        底部按钮文本
+     * @param cancleable       true为可以取消false为不可取消
+     * @param outsideTouchable true为可以点击空白区域false为不可点击
+     * @param listener         事件监听
+     * @return
+     */
+    public static BuildBean showBottomSheetAndCancel(Context context, List<? extends CharSequence> words, CharSequence bottomTxt, boolean cancleable, boolean outsideTouchable, DialogUIItemListener listener) 
+
+具体使用
+
+	List<String> strings = new ArrayList<>();
+                strings.add("1");
+                strings.add("2");
+                strings.add("3");
+                DialogUIUtils.showBottomSheetAndCancel(activity, strings, "取消", new DialogUIItemListener() {
+                    @Override
+                    public void onItemClick(CharSequence text, int position) {
+                    }
+
+                    @Override
+                    public void onBottomBtnClick() {
+                    }
+                }).show();
+
+#### 底部弹出列表 ####
+
+    /**
+     * 底部弹出列表 默认可取消可点击
+     *
+     * @param context  上下文
+     * @param datas    集合需要BottomSheetBean对象
+     * @param listener 事件监听
+     * @return
+     */
+    public static BuildBean showBottomSheet(Activity context, List datas, DialogUIItemListener listener)
+
+    /***
+     * 底部弹出列表
+     *
+     * @param context          上下文
+     * @param datas            集合需要BottomSheetBean对象
+     * @param cancleable       true为可以取消false为不可取消
+     * @param outsideTouchable true为可以点击空白区域false为不可点击
+     * @param listener         事件监听
+     * @return
+     */
+    public static BuildBean showBottomSheet(Activity context, List datas, boolean cancleable, boolean outsideTouchable, DialogUIItemListener listener)
+
+具体使用
+
+	List<BottomSheetBean> datass = new ArrayList<>();
+                datass.add(new BottomSheetBean(0, "1"));
+                datass.add(new BottomSheetBean(0, "2"));
+                datass.add(new BottomSheetBean(0, "3"));
+                DialogUIUtils.showBottomSheet(this, datass, new DialogUIItemListener() {
+                    @Override
+                    public void onItemClick(CharSequence text, int position) {
+
+                    }
+                }).show();
+
+#### 输入框 ####
+
+    /**
+     * 输入框 默认可取消可点击
+     *
+     * @param context   上下文
+     * @param title     标题
+     * @param hint1     第一个文本框提示语
+     * @param hint2     第二个文本框提示语
+     * @param firstTxt  第一个按钮文本
+     * @param secondTxt 第二个按钮文本
+     * @param listener  事件监听
+     * @return
+     */
+    public static BuildBean showAlertInput(Context context, CharSequence title, CharSequence hint1, CharSequence hint2, CharSequence firstTxt, CharSequence secondTxt, DialogUIListener listener)
+
+    /***
+     * 输入框
+     *
+     * @param context          上下文
+     * @param title            标题
+     * @param hint1            第一个文本框提示语
+     * @param hint2            第二个文本框提示语
+     * @param firstTxt         第一个按钮文本
+     * @param secondTxt        第二个按钮文本
+     * @param cancleable       true为可以取消false为不可取消
+     * @param outsideTouchable true为可以点击空白区域false为不可点击
+     * @param listener         事件监听
+     * @return
+     */
+    public static BuildBean showAlertInput(Context context, CharSequence title, CharSequence hint1, CharSequence hint2, CharSequence firstTxt, CharSequence secondTxt, boolean cancleable, boolean outsideTouchable, DialogUIListener listener)
+
+具体使用
+
+	DialogUIUtils.showAlertInput(activity, "登录", "请输入用户名", "请输入密码", "登录", "取消", new DialogUIListener() {
+                    @Override
+                    public void onPositive() {
+
+                    }
+
+                    @Override
+                    public void onNegative() {
+
+                    }
+
+                    @Override
+                    public void onGetInput(CharSequence input1, CharSequence input2) {
+                    }
+                }).show();
+
+#### md风格竖向底部弹出列表 ####
+
+    /**
+     * md风格竖向底部弹出列表 默认可取消可点击
+     *
+     * @param context   上下文
+     * @param title     标题
+     * @param datas     集合需要BottomSheetBean对象
+     * @param bottomTxt 底部item文本
+     * @param listener  事件监听
+     * @return
+     */
+    public static BuildBean showMdBottomSheetVertical(Context context, CharSequence title, List datas, CharSequence bottomTxt, DialogUIItemListener listener)
+
+    /***
+     * md风格竖向底部弹出列表
+     *
+     * @param context          上下文
+     * @param title            标题
+     * @param datas            集合需要BottomSheetBean对象
+     * @param bottomTxt        底部item文本
+     * @param cancleable       true为可以取消false为不可取消
+     * @param outsideTouchable true为可以点击空白区域false为不可点击
+     * @param listener         事件监听
+     * @return
+     */
+    public static BuildBean showMdBottomSheetVertical(Context context, CharSequence title, List datas, CharSequence bottomTxt, boolean cancleable, boolean outsideTouchable, DialogUIItemListener listener) 
+
+具体使用
+
+	List<BottomSheetBean> datass = new ArrayList<>();
+                datass.add(new BottomSheetBean(0, "1"));
+                datass.add(new BottomSheetBean(0, "2"));
+                datass.add(new BottomSheetBean(0, "3"));
+                DialogUIUtils.showMdBottomSheetVertical(this, datass, new DialogUIItemListener() {
+                    @Override
+                    public void onItemClick(CharSequence text, int position) {
+
+                    }
+                }).show();
+
+#### md风格横向底部弹出列表 ####
+
+    /**
+     * md风格横向底部弹出列表 默认可取消可点击
+     *
+     * @param context          上下文
+     * @param title            标题
+     * @param datas            集合需要BottomSheetBean对象
+     * @param bottomTxt        底部item文本
+     * @param columnsNum       列数量
+     * @param cancleable       true为可以取消false为不可取消
+     * @param outsideTouchable true为可以点击空白区域false为不可点击
+     * @param listener         事件监听
+     * @return
+     */
+    public static BuildBean showMdBottomSheetHorizontal(Context context, CharSequence title, List datas, CharSequence bottomTxt, int columnsNum, DialogUIItemListener listener) 
+
+    /***
+     * md风格横向底部弹出列表
+     *
+     * @param context          上下文
+     * @param title            标题
+     * @param datas            集合需要BottomSheetBean对象
+     * @param bottomTxt        底部item文本
+     * @param columnsNum       列数量
+     * @param cancleable       true为可以取消false为不可取消
+     * @param outsideTouchable true为可以点击空白区域false为不可点击
+     * @param listener         事件监听
+     * @return
+     */
+    public static BuildBean showMdBottomSheetHorizontal(Context context, CharSequence title, List datas, CharSequence bottomTxt, int columnsNum, boolean cancleable, boolean outsideTouchable, DialogUIItemListener listener)
+
+具体使用
+
+	List<BottomSheetBean> datass = new ArrayList<>();
+                datass.add(new BottomSheetBean(0, "1"));
+                datass.add(new BottomSheetBean(0, "2"));
+                datass.add(new BottomSheetBean(0, "3"));
+                DialogUIUtils.showMdBottomSheetHorizontal(this, datass, new DialogUIItemListener() {
+                    @Override
+                    public void onItemClick(CharSequence text, int position) {
+
+                    }
+                }).show();
+
 
 ## More Actions ##
 

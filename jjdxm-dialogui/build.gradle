@@ -9,7 +9,7 @@ ext {
     jjdxm_groupId = 'com.dou361.dialogui'
     jjdxm_artifactId = 'jjdxm-dialogui'
 
-    jjdxm_libraryVersion = '1.0.0'
+    jjdxm_libraryVersion = '1.0.1'
     jjdxm_libraryName = 'jjdxm-dialogui'
     jjdxm_libraryDescription = 'this is a dialogui dialogui of the application'
 
