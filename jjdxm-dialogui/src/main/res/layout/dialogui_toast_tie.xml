@@ -13,6 +13,7 @@
         android:background="@drawable/dialogui_shape_wihte_round_corner"
         android:gravity="center"
         android:minHeight="60dp"
+        android:padding="8dp"
         android:minWidth="60dp"
         android:orientation="vertical">
 

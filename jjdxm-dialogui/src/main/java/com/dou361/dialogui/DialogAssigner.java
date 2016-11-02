@@ -68,11 +68,13 @@ public class DialogAssigner implements Assignable {
     }
 
     @Override
-    public BuildBean assignMdAlert(Activity activity, CharSequence title, CharSequence msg, DialogUIListener listener) {
+    public BuildBean assignMdAlert(Activity activity, CharSequence title, CharSequence msg, boolean cancleable, boolean outsideTouchable, DialogUIListener listener) {
         BuildBean bean = new BuildBean();
         bean.context = activity;
         bean.msg = msg;
         bean.title = title;
+        bean.cancelable = cancleable;
+        bean.outsideTouchable = outsideTouchable;
         bean.listener = listener;
         bean.type = CommonConfig.TYPE_MD_ALERT;
         bean.btn1Color = CommonConfig.mdBtnColor;
@@ -82,10 +84,12 @@ public class DialogAssigner implements Assignable {
     }
 
     @Override
-    public BuildBean assignSingleChoose(Activity context, CharSequence title, int defaultChosen, CharSequence[] words, DialogUIItemListener listener) {
+    public BuildBean assignSingleChoose(Activity context, CharSequence title, int defaultChosen, CharSequence[] words, boolean cancleable, boolean outsideTouchable, DialogUIItemListener listener) {
         BuildBean bean = new BuildBean();
         bean.context = context;
         bean.title = title;
+        bean.cancelable = cancleable;
+        bean.outsideTouchable = outsideTouchable;
         bean.itemListener = listener;
         bean.wordsMd = words;
         bean.type = CommonConfig.TYPE_SINGLE_CHOOSE;
@@ -97,11 +101,13 @@ public class DialogAssigner implements Assignable {
     }
 
     @Override
-    public BuildBean assignMdMultiChoose(Activity context, CharSequence title, CharSequence[] words, boolean[] checkedItems, DialogUIListener btnListener) {
+    public BuildBean assignMdMultiChoose(Activity context, CharSequence title, CharSequence[] words, boolean[] checkedItems, boolean cancleable, boolean outsideTouchable, DialogUIListener btnListener) {
         BuildBean bean = new BuildBean();
         bean.context = context;
         bean.msg = title;
         bean.title = title;
+        bean.cancelable = cancleable;
+        bean.outsideTouchable = outsideTouchable;
         bean.listener = btnListener;
         bean.wordsMd = words;
         bean.checkedItems = checkedItems;
@@ -113,41 +119,47 @@ public class DialogAssigner implements Assignable {
     }
 
     @Override
-    public BuildBean assignAlert(Context activity, CharSequence title, CharSequence msg, DialogUIListener listener) {
+    public BuildBean assignAlert(Context activity, CharSequence title, CharSequence msg, boolean cancleable, boolean outsideTouchable, DialogUIListener listener) {
         BuildBean bean = new BuildBean();
         bean.context = activity;
         bean.msg = msg;
         bean.title = title;
         bean.text2 = "";
+        bean.cancelable = cancleable;
+        bean.outsideTouchable = outsideTouchable;
         bean.listener = listener;
         bean.type = CommonConfig.TYPE_ALERT;
         return bean;
     }
 
     @Override
-    public BuildBean assignAlertHorizontal(Context activity, CharSequence title, CharSequence msg, DialogUIListener listener) {
+    public BuildBean assignAlertHorizontal(Context activity, CharSequence title, CharSequence msg, boolean cancleable, boolean outsideTouchable, DialogUIListener listener) {
         BuildBean bean = new BuildBean();
         bean.context = activity;
         bean.msg = msg;
         bean.title = title;
+        bean.cancelable = cancleable;
+        bean.outsideTouchable = outsideTouchable;
         bean.listener = listener;
         bean.type = CommonConfig.TYPE_ALERT_HORIZONTAL;
         return bean;
     }
 
     @Override
-    public BuildBean assignAlertVertical(Context activity, CharSequence title, CharSequence msg, DialogUIListener listener) {
+    public BuildBean assignAlertVertical(Context activity, CharSequence title, CharSequence msg, boolean cancleable, boolean outsideTouchable, DialogUIListener listener) {
         BuildBean bean = new BuildBean();
         bean.context = activity;
         bean.msg = msg;
         bean.title = title;
+        bean.cancelable = cancleable;
+        bean.outsideTouchable = outsideTouchable;
         bean.listener = listener;
         bean.type = CommonConfig.TYPE_ALERT_VERTICAL;
         return bean;
     }
 
     @Override
-    public BuildBean assignCenterSheet(Context context, List<? extends CharSequence> words, DialogUIItemListener listener) {
+    public BuildBean assignCenterSheet(Context context, List<? extends CharSequence> words, boolean cancleable, boolean outsideTouchable, DialogUIItemListener listener) {
         BuildBean bean = new BuildBean();
         bean.context = context;
         bean.itemListener = listener;
@@ -158,9 +170,11 @@ public class DialogAssigner implements Assignable {
     }
 
     @Override
-    public BuildBean assignBottomSheetAndCancel(Context context, List<? extends CharSequence> words, CharSequence bottomTxt, DialogUIItemListener listener) {
+    public BuildBean assignBottomSheetAndCancel(Context context, List<? extends CharSequence> words, CharSequence bottomTxt, boolean cancleable, boolean outsideTouchable, DialogUIItemListener listener) {
         BuildBean bean = new BuildBean();
         bean.context = context;
+        bean.cancelable = cancleable;
+        bean.outsideTouchable = outsideTouchable;
         bean.itemListener = listener;
         bean.wordsIos = words;
         bean.type = CommonConfig.TYPE_BOTTOM_SHEET_CANCEL;
@@ -169,9 +183,11 @@ public class DialogAssigner implements Assignable {
 
     @Override
     public BuildBean assignAlertInput(Context context, CharSequence title, CharSequence hint1, CharSequence hint2,
-                                      CharSequence firstTxt, CharSequence secondTxt, DialogUIListener listener) {
+                                      CharSequence firstTxt, CharSequence secondTxt, boolean cancleable, boolean outsideTouchable, DialogUIListener listener) {
         BuildBean bean = new BuildBean();
         bean.context = context;
+        bean.cancelable = cancleable;
+        bean.outsideTouchable = outsideTouchable;
         bean.listener = listener;
         bean.title = title;
         bean.hint1 = hint1;
@@ -183,43 +199,52 @@ public class DialogAssigner implements Assignable {
     }
 
     @Override
-    public BuildBean assignCustomAlert(Context context, View contentView, int gravity) {
+    public BuildBean assignCustomAlert(Context context, View contentView, int gravity, boolean cancleable, boolean outsideTouchable) {
         BuildBean bean = new BuildBean();
         bean.context = context;
         bean.customView = contentView;
         bean.gravity = gravity;
+        bean.cancelable = cancleable;
+        bean.outsideTouchable = outsideTouchable;
         bean.type = CommonConfig.TYPE_CUSTOM_ALERT;
         return bean;
     }
 
     @Override
-    public BuildBean assignBottomSheet(Activity context, View contentView) {
+    public BuildBean assignBottomSheet(Activity context, List datas,boolean cancleable, boolean outsideTouchable, DialogUIItemListener listener) {
         BuildBean bean = new BuildBean();
         bean.context = context;
-        bean.customView = contentView;
+        bean.lvDatas = datas;
+        bean.cancelable = cancleable;
+        bean.outsideTouchable = outsideTouchable;
+        bean.itemListener = listener;
         bean.type = CommonConfig.TYPE_BOTTOM_SHEET;
         return bean;
     }
 
     @Override
-    public BuildBean assignMdBottomSheetVertical(Context context, CharSequence title, List datas, CharSequence bottomTxt, DialogUIItemListener listener) {
+    public BuildBean assignMdBottomSheetVertical(Context context, CharSequence title, List datas, CharSequence bottomTxt, boolean cancleable, boolean outsideTouchable, DialogUIItemListener listener) {
         BuildBean bean = new BuildBean();
         bean.context = context;
         bean.title = title;
         bean.lvDatas = datas;
         bean.bottomTxt = bottomTxt;
+        bean.cancelable = cancleable;
+        bean.outsideTouchable = outsideTouchable;
         bean.itemListener = listener;
         bean.type = CommonConfig.TYPE_BOTTOM_SHEET_VERTICAL;
         return bean;
     }
 
     @Override
-    public BuildBean assignMdBottomSheetHorizontal(Context context, CharSequence title, List datas, CharSequence bottomTxt, int columnsNum, DialogUIItemListener listener) {
+    public BuildBean assignMdBottomSheetHorizontal(Context context, CharSequence title, List datas, CharSequence bottomTxt, int columnsNum, boolean cancleable, boolean outsideTouchable, DialogUIItemListener listener) {
         BuildBean bean = new BuildBean();
         bean.context = context;
         bean.title = title;
         bean.lvDatas = datas;
         bean.bottomTxt = bottomTxt;
+        bean.cancelable = cancleable;
+        bean.outsideTouchable = outsideTouchable;
         bean.itemListener = listener;
         bean.gridColumns = columnsNum;
         bean.type = CommonConfig.TYPE_BOTTOM_SHEET_HORIZONTAL;

@@ -48,70 +48,70 @@ public interface Assignable {
     /**
      * md风格弹出框
      */
-    BuildBean assignMdAlert(Activity activity, CharSequence title, CharSequence msg, final DialogUIListener listener);
+    BuildBean assignMdAlert(Activity activity, CharSequence title, CharSequence msg,boolean cancleable, boolean outsideTouchable, final DialogUIListener listener);
 
     /**
      * md风格多选框
      */
-    BuildBean assignMdMultiChoose(Activity context, CharSequence title, final CharSequence[] words, final boolean[] checkedItems,
+    BuildBean assignMdMultiChoose(Activity context, CharSequence title, final CharSequence[] words, final boolean[] checkedItems,boolean cancleable, boolean outsideTouchable,
                                   final DialogUIListener btnListener);
 
     /**
      * 单选框
      */
-    BuildBean assignSingleChoose(Activity context, CharSequence title, final int defaultChosen, final CharSequence[] words,
+    BuildBean assignSingleChoose(Activity context, CharSequence title, final int defaultChosen, final CharSequence[] words,boolean cancleable, boolean outsideTouchable,
                                  final DialogUIItemListener listener);
 
     /**
      * 提示弹出框
      */
-    BuildBean assignAlert(Context activity, CharSequence title, CharSequence msg, final DialogUIListener listener);
+    BuildBean assignAlert(Context activity, CharSequence title, CharSequence msg,boolean cancleable, boolean outsideTouchable, final DialogUIListener listener);
 
     /**
      * 横向弹出框
      */
-    BuildBean assignAlertHorizontal(Context activity, CharSequence title, CharSequence msg, final DialogUIListener listener);
+    BuildBean assignAlertHorizontal(Context activity, CharSequence title, CharSequence msg,boolean cancleable, boolean outsideTouchable, final DialogUIListener listener);
 
     /**
      * 竖向弹出框
      */
-    BuildBean assignAlertVertical(Context activity, CharSequence title, CharSequence msg, final DialogUIListener listener);
+    BuildBean assignAlertVertical(Context activity, CharSequence title, CharSequence msg,boolean cancleable, boolean outsideTouchable, final DialogUIListener listener);
 
     /**
      * 中间弹出列表
      */
-    BuildBean assignCenterSheet(Context context, List<? extends CharSequence> words, final DialogUIItemListener listener);
+    BuildBean assignCenterSheet(Context context, List<? extends CharSequence> words,boolean cancleable, boolean outsideTouchable, final DialogUIItemListener listener);
 
     /**
      * 带取消的底部弹出列表
      */
-    BuildBean assignBottomSheetAndCancel(Context context, List<? extends CharSequence> words, CharSequence bottomTxt, final DialogUIItemListener listener);
+    BuildBean assignBottomSheetAndCancel(Context context, List<? extends CharSequence> words, CharSequence bottomTxt,boolean cancleable, boolean outsideTouchable, final DialogUIItemListener listener);
 
     /**
      * 底部弹出列表
      */
-    BuildBean assignBottomSheet(Activity context, View contentView);
+    BuildBean assignBottomSheet(Activity context, List<? extends CharSequence> words,boolean cancleable, boolean outsideTouchable, final DialogUIItemListener listener);
 
     /**
      * 输入框
      */
     BuildBean assignAlertInput(Context context, CharSequence title, CharSequence hint1, CharSequence hint2,
-                               CharSequence firstTxt, CharSequence secondTxt, final DialogUIListener listener);
+                               CharSequence firstTxt, CharSequence secondTxt,boolean cancleable, boolean outsideTouchable, final DialogUIListener listener);
 
     /**
      * md风格竖向底部弹出列表
      */
-    BuildBean assignMdBottomSheetVertical(Context context, CharSequence title, List datas, CharSequence bottomTxt, DialogUIItemListener listener);
+    BuildBean assignMdBottomSheetVertical(Context context, CharSequence title, List datas, CharSequence bottomTxt,boolean cancleable, boolean outsideTouchable, DialogUIItemListener listener);
 
     /**
      * md风格横向底部弹出列表
      */
-    BuildBean assignMdBottomSheetHorizontal(Context context, CharSequence title, List datas, CharSequence bottomTxt, int columnsNum, DialogUIItemListener listener);
+    BuildBean assignMdBottomSheetHorizontal(Context context, CharSequence title, List datas, CharSequence bottomTxt, int columnsNum,boolean cancleable, boolean outsideTouchable, DialogUIItemListener listener);
 
     /**
      * 自定义弹出框
      */
-    BuildBean assignCustomAlert(Context context, View contentView, int gravity);
+    BuildBean assignCustomAlert(Context context, View contentView, int gravity,boolean cancleable, boolean outsideTouchable);
 
 
 }

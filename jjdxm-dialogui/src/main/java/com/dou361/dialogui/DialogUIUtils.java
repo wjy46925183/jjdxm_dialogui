@@ -67,136 +67,371 @@ public class DialogUIUtils {
     }
 
     /**
-     * 弹出toast
+     * 弹出toast 默认白色背景可取消可点击
+     *
+     * @param context 上下文
+     * @param msg     提示文本
      */
     public static BuildBean showToastTie(Context context, CharSequence msg) {
-        return showToastTie(context, msg, false);
+        return showToastTie(context, msg, true);
+    }
+
+    /**
+     * 弹出toast 默认可取消可点击
+     *
+     * @param context   上下文
+     * @param msg       提示文本
+     * @param isWhiteBg true为白色背景false为灰色背景
+     */
+    public static BuildBean showToastTie(Context context, CharSequence msg, boolean isWhiteBg) {
+        return showToastTie(context, msg, true, true, isWhiteBg);
     }
 
     /**
      * 弹出toast
+     *
+     * @param context          上下文
+     * @param msg              提示文本
+     * @param cancleable       true为可以取消false为不可取消
+     * @param outsideTouchable true为可以点击空白区域false为不可点击
+     * @param isWhiteBg        true为白色背景false为灰色背景
      */
-    public static BuildBean showToastTie(Context context, CharSequence msg, boolean isWhiteBg) {
+    public static BuildBean showToastTie(Context context, CharSequence msg, boolean cancleable, boolean outsideTouchable, boolean isWhiteBg) {
         return DialogAssigner.getInstance().assignToastTie(context, msg, true, true, isWhiteBg);
     }
 
     /**
-     * 横向加载框
+     * 横向加载框 默认白色背景可取消可点击
+     *
+     * @param context 上下文
+     * @param msg     提示文本
      */
-    public static BuildBean showLoadingHorizontal(Context context, CharSequence msg, boolean cancleable, boolean outsideTouchable) {
-        return showLoadingHorizontal(context, msg, cancleable, outsideTouchable, false);
+    public static BuildBean showLoadingHorizontal(Context context, CharSequence msg) {
+        return showLoadingHorizontal(context, msg, true, true, true);
+    }
+
+    /**
+     * 横向加载框 默认可取消可点击
+     *
+     * @param context   上下文
+     * @param msg       提示文本
+     * @param isWhiteBg true为白色背景false为灰色背景
+     */
+    public static BuildBean showLoadingHorizontal(Context context, CharSequence msg, boolean isWhiteBg) {
+        return showLoadingHorizontal(context, msg, true, true, isWhiteBg);
     }
 
     /**
      * 横向加载框
+     *
+     * @param context          上下文
+     * @param msg              提示文本
+     * @param cancleable       true为可以取消false为不可取消
+     * @param outsideTouchable true为可以点击空白区域false为不可点击
+     * @param isWhiteBg        true为白色背景false为灰色背景
      */
     public static BuildBean showLoadingHorizontal(Context context, CharSequence msg, boolean cancleable, boolean outsideTouchable, boolean isWhiteBg) {
         return DialogAssigner.getInstance().assignLoadingHorizontal(context, msg, cancleable, outsideTouchable, isWhiteBg);
     }
 
     /**
-     * 竖向加载框
+     * 竖向加载框  默认白色背景可取消可点击
+     *
+     * @param context 上下文
+     * @param msg     提示文本
      */
-    public static BuildBean showLoadingVertical(Context context, CharSequence msg, boolean cancleable, boolean outsideTouchable) {
-        return showLoadingVertical(context, msg, cancleable, outsideTouchable, false);
+    public static BuildBean showLoadingVertical(Context context, CharSequence msg) {
+        return showLoadingVertical(context, msg, true, true, true);
+    }
+
+    /**
+     * 竖向加载框 默认可取消可点击
+     *
+     * @param context   上下文
+     * @param msg       提示文本
+     * @param isWhiteBg true为白色背景false为灰色背景
+     */
+    public static BuildBean showLoadingVertical(Context context, CharSequence msg, boolean isWhiteBg) {
+        return showLoadingVertical(context, msg, true, true, isWhiteBg);
     }
 
     /**
      * 竖向加载框
+     *
+     * @param context          上下文
+     * @param msg              提示文本
+     * @param cancleable       true为可以取消false为不可取消
+     * @param outsideTouchable true为可以点击空白区域false为不可点击
+     * @param isWhiteBg        true为白色背景false为灰色背景
      */
     public static BuildBean showLoadingVertical(Context context, CharSequence msg, boolean cancleable, boolean outsideTouchable, boolean isWhiteBg) {
         return DialogAssigner.getInstance().assignLoadingVertical(context, msg, cancleable, outsideTouchable, isWhiteBg);
     }
 
-    /**
-     * md风格弹出框
+    /***
+     * md风格弹出框 默认可取消可点击
+     *
+     * @param activity 所在activity
+     * @param title    标题 不传则无标题
+     * @param msg      消息
+     * @param listener 事件监听
+     * @return
      */
     public static BuildBean showMdAlert(Activity activity, CharSequence title, CharSequence msg, DialogUIListener listener) {
-        return DialogAssigner.getInstance().assignMdAlert(activity, title, msg, listener);
+        return showMdAlert(activity, title, msg, true, true, listener);
+    }
+
+    /***
+     * md风格弹出框
+     *
+     * @param activity         所在activity
+     * @param title            标题 不传则无标题
+     * @param msg              消息
+     * @param cancleable       true为可以取消false为不可取消
+     * @param outsideTouchable true为可以点击空白区域false为不可点击
+     * @param listener         事件监听
+     * @return
+     */
+    public static BuildBean showMdAlert(Activity activity, CharSequence title, CharSequence msg, boolean cancleable, boolean outsideTouchable, DialogUIListener listener) {
+        return DialogAssigner.getInstance().assignMdAlert(activity, title, msg, cancleable, outsideTouchable, listener);
     }
 
     /**
-     * md风格多选框
+     * md风格多选框  默认可取消可点击
+     *
+     * @param activity     所在activity
+     * @param title        标题 不传则无标题
+     * @param words        消息数组
+     * @param checkedItems 默认选中项
+     * @param listener     事件监听
      */
-    public static BuildBean showMdMultiChoose(Activity context, CharSequence title, CharSequence[] words, boolean[] checkedItems, DialogUIListener btnListener) {
-        return DialogAssigner.getInstance().assignMdMultiChoose(context, title, words, checkedItems, btnListener);
+    public static BuildBean showMdMultiChoose(Activity activity, CharSequence title, CharSequence[] words, boolean[] checkedItems, DialogUIListener listener) {
+        return showMdMultiChoose(activity, title, words, checkedItems, true, true, listener);
+    }
+
+    /***
+     * md风格多选框
+     *
+     * @param activity         所在activity
+     * @param title            标题 不传则无标题
+     * @param words            消息数组
+     * @param checkedItems     默认选中项
+     * @param cancleable       true为可以取消false为不可取消
+     * @param outsideTouchable true为可以点击空白区域false为不可点击
+     * @param listener         事件监听
+     * @return
+     */
+    public static BuildBean showMdMultiChoose(Activity activity, CharSequence title, CharSequence[] words, boolean[] checkedItems, boolean cancleable, boolean outsideTouchable, DialogUIListener listener) {
+        return DialogAssigner.getInstance().assignMdMultiChoose(activity, title, words, checkedItems, cancleable, outsideTouchable, listener);
+    }
+
+    /**
+     * 单选框  默认可取消可点击
+     *
+     * @param activity      所在activity
+     * @param title         标题 不传则无标题
+     * @param defaultChosen 默认选中项
+     * @param words         消息数组
+     * @param listener      事件监听
+     */
+    public static BuildBean showSingleChoose(Activity activity, CharSequence title, int defaultChosen, CharSequence[] words, DialogUIItemListener listener) {
+        return showSingleChoose(activity, title, defaultChosen, words, true, true, listener);
     }
 
     /**
      * 单选框
+     *
+     * @param activity         所在activity
+     * @param title            标题 不传则无标题
+     * @param defaultChosen    默认选中项
+     * @param words            消息数组
+     * @param cancleable       true为可以取消false为不可取消
+     * @param outsideTouchable true为可以点击空白区域false为不可点击
+     * @param listener         事件监听
      */
-    public static BuildBean showSingleChoose(Activity context, CharSequence title, int defaultChosen, CharSequence[] words, DialogUIItemListener listener) {
-        return DialogAssigner.getInstance().assignSingleChoose(context, title, defaultChosen, words, listener);
+    public static BuildBean showSingleChoose(Activity activity, CharSequence title, int defaultChosen, CharSequence[] words, boolean cancleable, boolean outsideTouchable, DialogUIItemListener listener) {
+        return DialogAssigner.getInstance().assignSingleChoose(activity, title, defaultChosen, words, cancleable, outsideTouchable, listener);
+    }
+
+    /**
+     * 提示弹出框 默认可取消可点击
+     *
+     * @param activity 所在activity
+     * @param title    标题 不传则无标题
+     * @param listener 事件监听
+     */
+    public static BuildBean showAlert(Activity activity, CharSequence title, CharSequence msg, DialogUIListener listener) {
+        return showAlert(activity, title, msg, true, true, listener);
     }
 
     /**
      * 提示弹出框
+     *
+     * @param activity         所在activity
+     * @param title            标题 不传则无标题
+     * @param cancleable       true为可以取消false为不可取消
+     * @param outsideTouchable true为可以点击空白区域false为不可点击
+     * @param listener         事件监听
      */
-    public static BuildBean showAlert(Context activity, CharSequence title, CharSequence msg, DialogUIListener listener) {
-        return DialogAssigner.getInstance().assignAlert(activity, title, msg, listener);
+    public static BuildBean showAlert(Activity activity, CharSequence title, CharSequence msg, boolean cancleable, boolean outsideTouchable, DialogUIListener listener) {
+        return DialogAssigner.getInstance().assignAlert(activity, title, msg, cancleable, outsideTouchable, listener);
+    }
+
+    /**
+     * 横向弹出框  默认可取消可点击
+     *
+     * @param activity 所在activity
+     * @param title    标题 不传则无标题
+     * @param msg      消息
+     * @param listener 事件监听
+     */
+    public static BuildBean showAlertHorizontal(Context activity, CharSequence title, CharSequence msg, DialogUIListener listener) {
+        return showAlertHorizontal(activity, title, msg, true, true, listener);
     }
 
     /**
      * 横向弹出框
+     *
+     * @param activity         所在activity
+     * @param title            标题 不传则无标题
+     * @param msg              消息
+     * @param cancleable       true为可以取消false为不可取消
+     * @param outsideTouchable true为可以点击空白区域false为不可点击
+     * @param listener         事件监听
      */
-    public static BuildBean showAlertHorizontal(Context activity, CharSequence title, CharSequence msg, DialogUIListener listener) {
-        return DialogAssigner.getInstance().assignAlertHorizontal(activity, title, msg, listener);
+    public static BuildBean showAlertHorizontal(Context activity, CharSequence title, CharSequence msg, boolean cancleable, boolean outsideTouchable, DialogUIListener listener) {
+        return DialogAssigner.getInstance().assignAlertHorizontal(activity, title, msg, cancleable, outsideTouchable, listener);
+    }
+
+    /**
+     * 竖向弹出框  默认可取消可点击
+     *
+     * @param activity 所在activity
+     * @param title    标题 不传则无标题
+     * @param msg      消息
+     * @param listener 事件监听
+     */
+    public static BuildBean showAlertVertical(Context activity, CharSequence title, CharSequence msg, DialogUIListener listener) {
+        return showAlertVertical(activity, title, msg, true, true, listener);
     }
 
     /**
      * 竖向弹出框
+     *
+     * @param activity         所在activity
+     * @param title            标题 不传则无标题
+     * @param msg              消息
+     * @param cancleable       true为可以取消false为不可取消
+     * @param outsideTouchable true为可以点击空白区域false为不可点击
+     * @param listener         事件监听
      */
-    public static BuildBean showAlertVertical(Context activity, CharSequence title, CharSequence msg, DialogUIListener listener) {
-        return DialogAssigner.getInstance().assignAlertVertical(activity, title, msg, listener);
+    public static BuildBean showAlertVertical(Context activity, CharSequence title, CharSequence msg, boolean cancleable, boolean outsideTouchable, DialogUIListener listener) {
+        return DialogAssigner.getInstance().assignAlertVertical(activity, title, msg, cancleable, outsideTouchable, listener);
+    }
+
+    /**
+     * 中间弹出列表 默认可取消可点击
+     */
+    public static BuildBean showCenterSheet(Context context, List<? extends CharSequence> words, DialogUIItemListener listener) {
+        return showCenterSheet(context, words, true, true, listener);
     }
 
     /**
      * 中间弹出列表
      */
-    public static BuildBean showCenterSheet(Context context, List<? extends CharSequence> words, DialogUIItemListener listener) {
-        return DialogAssigner.getInstance().assignCenterSheet(context, words, listener);
+    public static BuildBean showCenterSheet(Context context, List<? extends CharSequence> words, boolean cancleable, boolean outsideTouchable, DialogUIItemListener listener) {
+        return DialogAssigner.getInstance().assignCenterSheet(context, words, cancleable, outsideTouchable, listener);
     }
 
     /**
      * 带取消的底部弹出列表
      */
     public static BuildBean showBottomSheetAndCancel(Context context, List<? extends CharSequence> words, CharSequence bottomTxt, DialogUIItemListener listener) {
-        return DialogAssigner.getInstance().assignBottomSheetAndCancel(context, words, bottomTxt, listener);
+        return showBottomSheetAndCancel(context, words, bottomTxt, true, true, listener);
+    }
+
+    /**
+     * 带取消的底部弹出列表
+     */
+    public static BuildBean showBottomSheetAndCancel(Context context, List<? extends CharSequence> words, CharSequence bottomTxt, boolean cancleable, boolean outsideTouchable, DialogUIItemListener listener) {
+        return DialogAssigner.getInstance().assignBottomSheetAndCancel(context, words, bottomTxt, cancleable, outsideTouchable, listener);
     }
 
     /**
      * 底部弹出列表
      */
-    public static BuildBean showBottomSheet(Activity context, View contentView) {
-        return DialogAssigner.getInstance().assignBottomSheet(context, contentView);
+    public static BuildBean showBottomSheet(Activity context, List datas, DialogUIItemListener listener) {
+        return showBottomSheet(context, datas, true, true, listener);
+    }
+
+    /**
+     * 底部弹出列表
+     */
+    public static BuildBean showBottomSheet(Activity context, List datas, boolean cancleable, boolean outsideTouchable, DialogUIItemListener listener) {
+        return DialogAssigner.getInstance().assignBottomSheet(context, datas, cancleable, outsideTouchable, listener);
     }
 
     /**
      * 输入框
      */
     public static BuildBean showAlertInput(Context context, CharSequence title, CharSequence hint1, CharSequence hint2, CharSequence firstTxt, CharSequence secondTxt, DialogUIListener listener) {
-        return DialogAssigner.getInstance().assignAlertInput(context, title, hint1, hint2, firstTxt, secondTxt, listener);
+        return showAlertInput(context, title, hint1, hint2, firstTxt, secondTxt, true, true, listener);
+    }
+
+    /**
+     * 输入框
+     */
+    public static BuildBean showAlertInput(Context context, CharSequence title, CharSequence hint1, CharSequence hint2, CharSequence firstTxt, CharSequence secondTxt, boolean cancleable, boolean outsideTouchable, DialogUIListener listener) {
+        return DialogAssigner.getInstance().assignAlertInput(context, title, hint1, hint2, firstTxt, secondTxt, cancleable, outsideTouchable, listener);
     }
 
     /**
      * md风格竖向底部弹出列表
      */
     public static BuildBean showMdBottomSheetVertical(Context context, CharSequence title, List datas, CharSequence bottomTxt, DialogUIItemListener listener) {
-        return DialogAssigner.getInstance().assignMdBottomSheetVertical(context, title, datas, bottomTxt, listener);
+        return showMdBottomSheetVertical(context, title, datas, bottomTxt, true, true, listener);
+    }
+
+    /**
+     * md风格竖向底部弹出列表
+     */
+    public static BuildBean showMdBottomSheetVertical(Context context, CharSequence title, List datas, CharSequence bottomTxt, boolean cancleable, boolean outsideTouchable, DialogUIItemListener listener) {
+        return DialogAssigner.getInstance().assignMdBottomSheetVertical(context, title, datas, bottomTxt, cancleable, outsideTouchable, listener);
     }
 
     /**
      * md风格横向底部弹出列表
      */
     public static BuildBean showMdBottomSheetHorizontal(Context context, CharSequence title, List datas, CharSequence bottomTxt, int columnsNum, DialogUIItemListener listener) {
-        return DialogAssigner.getInstance().assignMdBottomSheetHorizontal(context, title, datas, bottomTxt, columnsNum, listener);
+        return showMdBottomSheetHorizontal(context, title, datas, bottomTxt, columnsNum, true, true, listener);
+    }
+
+    /**
+     * md风格横向底部弹出列表
+     */
+    public static BuildBean showMdBottomSheetHorizontal(Context context, CharSequence title, List datas, CharSequence bottomTxt, int columnsNum, boolean cancleable, boolean outsideTouchable, DialogUIItemListener listener) {
+        return DialogAssigner.getInstance().assignMdBottomSheetHorizontal(context, title, datas, bottomTxt, columnsNum, cancleable, outsideTouchable, listener);
+    }
+
+    /**
+     * 自定义弹出框
+     */
+    public static BuildBean showCustomAlert(Context context, View contentView) {
+        return showCustomAlert(context, contentView, Gravity.CENTER, true, true);
     }
 
     /**
      * 自定义弹出框
      */
     public static BuildBean showCustomAlert(Context context, View contentView, int gravity) {
-        return DialogAssigner.getInstance().assignCustomAlert(context, contentView, gravity);
+        return showCustomAlert(context, contentView, gravity, true, true);
+    }
+
+    /**
+     * 自定义弹出框
+     */
+    public static BuildBean showCustomAlert(Context context, View contentView, int gravity, boolean cancleable, boolean outsideTouchable) {
+        return DialogAssigner.getInstance().assignCustomAlert(context, contentView, gravity, cancleable, outsideTouchable);
     }
 
 

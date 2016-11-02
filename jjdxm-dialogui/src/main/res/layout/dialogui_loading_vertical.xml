@@ -18,10 +18,11 @@
         android:orientation="vertical">
 
         <ProgressBar
+            android:id="@+id/pb_bg"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_gravity="center_horizontal"
-            android:indeterminateDrawable="@drawable/dialogui_rotate_mum"
+            android:indeterminateDrawable="@drawable/dialogui_rotate_mum_light"
             android:indeterminateDuration="1200"/>
 
         <TextView
@@ -30,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:ellipsize="end"
             android:maxLines="1"
             android:maxWidth="300dp"
