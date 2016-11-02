@@ -16,9 +16,14 @@
 ## Introduction ##
 [English documentation](https://github.com/jjdxmashl/jjdxm_dialogui/blob/master/README_EN.md)
 
-各种简单样式的弹出框
+这是一个基于AlertDialog和Dialog这两个类封装的多种弹出框样式，其中提供各种简单样式的弹出框使用说明。同时也可自定义弹出框。
 
 ## Features ##
+
+1.使用链式开发代码简洁明了
+2.所有的弹出框样式都在DialogUIUtils这个类中完成，方便查阅方法
+3.可以自定义弹出框字体样式
+4.简单的类似加载框的样式可以支持两种主题更改默认白色和灰色
 
 ## Screenshots ##
 
